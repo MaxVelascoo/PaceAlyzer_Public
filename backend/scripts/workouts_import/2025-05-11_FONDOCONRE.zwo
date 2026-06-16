@@ -1,0 +1,36 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>FONDO CON RECORDATORIO DE FRC-FTP</name>
+	<description>INCLUYE en la hora 2 y 4
+
+4 x 90&quot; rec 4-5 min
+
+En la hora 1, 3 y 5 haz
+6 x 10-12seg sprintanto a tope, cuando te pille bien</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<SteadyState Duration="1200" Power="0.7">
+		</SteadyState>
+		<IntervalsT Repeat="6" OnDuration="12" OnPower="2.75" OffDuration="300" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.7">
+		</SteadyState>
+		<IntervalsT Repeat="4" OnDuration="90" OnPower="1.45" OffDuration="600" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.7">
+		</SteadyState>
+		<IntervalsT Repeat="6" OnDuration="12" OnPower="2.75" OffDuration="300" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.7">
+		</SteadyState>
+		<IntervalsT Repeat="4" OnDuration="90" OnPower="1.45" OffDuration="600" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.7">
+		</SteadyState>
+		<IntervalsT Repeat="6" OnDuration="12" OnPower="2.75" OffDuration="300" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.7">
+		</SteadyState>
+	</workout>
+</workout_file>

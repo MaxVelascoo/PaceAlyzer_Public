@@ -1,0 +1,730 @@
+/* ── Base ── */
+.page {
+  min-height: 100vh;
+  background: #f0f0f0;
+  padding: 26px 22px 34px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid rgba(15,15,20,0.07);
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(15,15,20,0.07);
+  height: calc(100vh - 120px);
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  background: #fafafa;
+  border-right: 1px solid rgba(15,15,20,0.07);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(15,15,20,0.07);
+}
+
+.sidebarTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f0f14;
+}
+
+.sidebarSection {
+  padding: 16px 20px;
+}
+
+.sidebarSectionTitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(15,15,20,0.4);
+  margin-bottom: 10px;
+}
+
+.weekPills {
+  display: flex;
+  gap: 6px;
+}
+
+.dayPill {
+  flex: 1;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(15,15,20,0.1);
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.55);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: inherit;
+}
+
+.dayPill:hover {
+  background: rgba(99,102,241,0.06);
+  border-color: rgba(99,102,241,0.2);
+  color: #6366f1;
+}
+
+.dayPillActive {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.25);
+}
+
+.sidebarDivider {
+  height: 1px;
+  background: rgba(15,15,20,0.07);
+  margin: 0 20px;
+}
+
+.workoutSummary {
+  padding: 16px 20px;
+  flex: 1;
+}
+
+.summaryCard {
+  display: block;
+  text-decoration: none;
+  background: rgba(99,102,241,0.06);
+  border: 1px solid rgba(99,102,241,0.15);
+  border-radius: 14px;
+  padding: 14px 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.summaryCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99,102,241,0.12);
+  border-color: rgba(99,102,241,0.3);
+}
+
+.summaryTitle {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f0f14;
+  margin-bottom: 4px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.summaryDuration {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #6366f1;
+  margin-bottom: 6px;
+}
+
+.summaryDescription {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(15,15,20,0.55);
+  line-height: 1.45;
+}
+
+.summaryLink {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(99,102,241,0.7);
+}
+
+.summaryLoading,
+.summaryEmpty {
+  padding: 16px 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.4);
+}
+
+/* ── Thread column ── */
+.threadCol {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.thread {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.threadHeader {
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(15,15,20,0.07);
+  background: #fff;
+}
+
+.brandInline {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99,102,241,0.1);
+  overflow: hidden;
+}
+
+.brandLogo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.threadTitle {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f0f14;
+  letter-spacing: -0.01em;
+}
+
+/* ── Messages ── */
+.messages {
+  flex: 1;
+  overflow: auto;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #fafafa;
+}
+
+.msgRowLeft {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.msgRowRight {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+/* Pazey avatar */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99,102,241,0.1);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatarLogo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* User avatar — extra space for the ring */
+.avatarUser {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarUserImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bubbles */
+.bubbleAssistant {
+  max-width: 600px;
+  padding: 12px 14px;
+  border-radius: 4px 16px 16px 16px;
+  background: #fff;
+  border: 1px solid rgba(15,15,20,0.07);
+  box-shadow: 0 2px 8px rgba(15,15,20,0.04);
+  color: #0f0f14;
+}
+
+.bubbleUser {
+  max-width: 520px;
+  padding: 12px 16px;
+  border-radius: 16px 4px 16px 16px;
+  background: #6366f1;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.25);
+}
+
+.msgText {
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+/* ── Action card ── */
+.actionCard {
+  margin-top: 10px;
+  background: #fff;
+  border: 1px solid rgba(15,15,20,0.07);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 4px 12px rgba(15,15,20,0.05);
+}
+
+.actionCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.actionCardTitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.actionCardChip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(15,15,20,0.05);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.6);
+}
+
+.actionCardWorkout {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f0f14;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+
+.actionCardZone {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.45);
+  margin-bottom: 10px;
+}
+
+.actionCardBullets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bulletRow {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.bulletDot {
+  margin-top: 4px;
+  color: rgba(15,15,20,0.25);
+  font-size: 0.7rem;
+}
+
+.bulletText { flex: 1; }
+
+.bulletMain {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.bulletLabel {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f0f14;
+}
+
+.bulletDetail {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.55);
+}
+
+.bulletSub {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(15,15,20,0.45);
+  margin-top: 2px;
+}
+
+.actionRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.actionPrimary {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #6366f1;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.25);
+  transition: transform 0.15s;
+}
+
+.actionPrimary:hover { transform: translateY(-1px); }
+
+.actionGhost {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(15,15,20,0.1);
+  cursor: pointer;
+  background: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: rgba(15,15,20,0.7);
+  transition: background 0.15s;
+}
+
+.actionGhost:hover { background: rgba(15,15,20,0.04); }
+
+/* ── Composer ── */
+.composer {
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid rgba(15,15,20,0.07);
+  background: #fff;
+}
+
+.input {
+  flex: 1;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid rgba(15,15,20,0.1);
+  padding: 0 14px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  font-family: inherit;
+  outline: none;
+  background: #fafafa;
+  color: #0f0f14;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input:focus {
+  border-color: rgba(99,102,241,0.4);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.08);
+  background: #fff;
+}
+
+.sendBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: #6366f1;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.25);
+  transition: transform 0.15s;
+  font-family: inherit;
+}
+
+.sendBtn:hover { transform: translateY(-1px); }
+
+/* ── Typing indicator ── */
+.typingBubble {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 12px 16px;
+  background: #fff;
+  border-radius: 4px 16px 16px 16px;
+  border: 1px solid rgba(15,15,20,0.07);
+  box-shadow: 0 2px 8px rgba(15,15,20,0.04);
+  width: fit-content;
+}
+
+.typingDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(15,15,20,0.3);
+  animation: typingBounce 1.2s infinite ease-in-out;
+}
+
+.typingDot:nth-child(1) { animation-delay: 0s; }
+.typingDot:nth-child(2) { animation-delay: 0.2s; }
+.typingDot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+  30%            { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+
+/* ── Workout preview card ── */
+.workoutPreviewCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+
+.workoutPreviewCard:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.35);
+  transform: translateY(-1px);
+}
+
+.workoutPreviewDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6366f1;
+  flex-shrink: 0;
+}
+
+.workoutPreviewBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.workoutPreviewTitle {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f0f14;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.workoutPreviewDate {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #6366f1;
+}
+
+/* ── Week plan preview card ── */
+.weekPlanCard {
+  margin-top: 10px;
+  background: rgba(99, 102, 241, 0.04);
+  border: 1px solid rgba(99, 102, 241, 0.16);
+  border-radius: 14px;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.weekPlanHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 8px;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.10);
+}
+
+.weekPlanTitle {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(15,15,20,0.45);
+}
+
+.weekPlanTotal {
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: #6366f1;
+  letter-spacing: -0.01em;
+}
+
+.weekPlanRows {
+  display: flex;
+  flex-direction: column;
+}
+
+.weekPlanRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15,15,20,0.05);
+  transition: background 0.12s;
+}
+
+.weekPlanRow:last-child {
+  border-bottom: none;
+}
+
+.weekPlanRow:hover {
+  background: rgba(99, 102, 241, 0.06);
+}
+
+.weekPlanRowLeft {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  width: 44px;
+}
+
+.weekPlanDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6366f1;
+  flex-shrink: 0;
+}
+
+.weekPlanDayLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.weekPlanRowTitle {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0f0f14;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.weekPlanRowDur {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.45);
+  flex-shrink: 0;
+}
+
+.weekPlanFooter {
+  display: block;
+  padding: 8px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6366f1;
+  text-decoration: none;
+  border-top: 1px solid rgba(99, 102, 241, 0.10);
+  transition: background 0.12s;
+}
+
+.weekPlanFooter:hover {
+  background: rgba(99, 102, 241, 0.06);
+}
+
+/* ── Composer wrapper (con chip adjunto) ── */
+.composerWrapper {
+  background: #fff;
+  border-top: 1px solid rgba(15,15,20,0.07);
+}
+
+.composerWrapper .composer {
+  border-top: none;
+}
+
+/* ── Chip de entreno adjunto (en el composer) ── */
+.attachedChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6366f1;
+}
+
+.attachedChipText {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.attachedChipDate {
+  color: rgba(99,102,241,0.6);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.attachedChipClose {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(99,102,241,0.5);
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0 2px;
+  flex-shrink: 0;
+  transition: color 0.12s;
+}
+
+.attachedChipClose:hover {
+  color: #6366f1;
+}
+
+/* ── Chip de entreno adjunto (en el bubble del mensaje) ── */
+.msgAttachedChip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}

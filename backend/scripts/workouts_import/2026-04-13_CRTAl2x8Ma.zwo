@@ -1,0 +1,24 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>CRTA l 2 x 8 Max. Torque</name>
+	<description>calentar 20&apos; Z2-Z3, después en una subida del 10-12% en 100 m hacer trabajo de FME:
+
+8 x 10&apos;&apos; a tope (casi parado o parado de cad: 20-35rpm de arrancada, terminar en cadencia de 80 rpm o más al final del tiempo, desarrollo todo metido) + 3&apos; rec. Z1 después rodar 20&apos; Z2 y repetir mismo trabajo marcado.
+
+Flexibilidad al final.
+RPE: 6-7</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1200" PowerHigh="0.69" PowerLow="0.49">
+		</Warmup>
+		<IntervalsT Repeat="8" OnDuration="10" OnPower="1.85" OffDuration="180" OffPower="0.53" Cadence="65" CadenceResting="65" >
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.59">
+		</SteadyState>
+		<IntervalsT Repeat="8" OnDuration="10" OnPower="1.85" OffDuration="180" OffPower="0.55" Cadence="65" CadenceResting="65" >
+		</IntervalsT>
+		<Cooldown Duration="1200" PowerHigh="0.5" PowerLow="0.7">
+		</Cooldown>
+	</workout>
+</workout_file>

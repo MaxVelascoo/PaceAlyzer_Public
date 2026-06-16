@@ -1,0 +1,24 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>TEMPO (4 x 10)</name>
+	<description>OBJETIVO: Mejorar la resistencia y la capacidad aeróbica manteniendo la potencia en el rango de tempo (82-85 % de FTP). Este entrenamiento desarrolla la resistencia muscular, mejora la eficiencia en el uso del oxígeno y ayuda a mantener el umbral de lactato, lo que aumenta el rendimiento en eventos prolongados​.
+__________________________________________
+
+EJECUCIÓN: Terreno variado (llano o subida)
+__________________________________________
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1800" PowerHigh="0.7" PowerLow="0.5">
+		</Warmup>
+		<IntervalsT Repeat="4" OnDuration="600" OnPower="0.84" OffDuration="600" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1800" Power="0.6">
+		</SteadyState>
+	</workout>
+</workout_file>

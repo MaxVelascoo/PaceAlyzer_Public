@@ -1,0 +1,477 @@
+---
+# Experimento B: evaluación del routing del Operator.
+# Este dataset está organizado según el contexto que necesita cada query:
+# 1. stateless: no necesita current_workout ni historial previo
+# 2. requires_current_workout: depende de que exista un entreno ya cargado en el día de referencia
+# 3. requires_conversation_history: el mensaje solo tiene sentido con historial conversacional previo
+#
+# Nota para el futuro script de evaluación:
+# - El Operator recibe:
+#   - system prompt fijo de app/agents/operator_agent.py
+#   - user prompt con:
+#       * _week_context()
+#       * conversation_history si existe
+#       * format_context_for_prompt(athlete_context) si existe
+#       * resumen de current_workout del state['date']
+#       * mensaje actual del usuario
+# - athlete_context puede rellenarse en el script con valores sintéticos completos a partir
+#   de estos mínimos, igual que en el experimento A.
+
+# ---------------------------------------------------------------------------
+# BLOQUE 1: QUERIES STATELESS
+# No necesitan current_workout ni historial previo. Aquí evaluamos routing puro
+# desde el mensaje del usuario más el contexto general del atleta y la fecha.
+# ---------------------------------------------------------------------------
+
+- id: OP001
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "ponme un entreno de umbral para el sábado"
+  athlete_context: {tsb_category: "normal", objective: "mejorar FTP", target_duration_min: 75}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "Tipo de sesión abierto sin estructura detallada."
+
+- id: OP002
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "mañana quiero algo de VO2max corto"
+  athlete_context: {tsb_category: "fresh", objective: "mejorar VO2max", target_duration_min: 60}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "Familia definida, sin series concretas."
+
+- id: OP003
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "dame un fondo largo para este domingo"
+  athlete_context: {tsb_category: "normal", objective: "resistencia", target_duration_min: 150}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "Endurance abierto."
+
+- id: OP004
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "quiero una sesión de sweet spot para hoy"
+  athlete_context: {tsb_category: "normal", objective: "subir FTP", target_duration_min: 70}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "Pide familia, no estructura."
+
+- id: OP005
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "propónme algo duro según mi forma actual para mañana"
+  athlete_context: {tsb_category: "fresh", objective: "rendimiento general", target_duration_min: 80}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "El sistema debe decidir por contexto."
+
+- id: OP006
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "ponme un entreno de sprints neuromusculares para el martes"
+  athlete_context: {tsb_category: "fresh", objective: "explosividad", target_duration_min: 55}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "Sprint abierto."
+
+- id: OP007
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "necesito activación pre-carrera para mañana"
+  athlete_context: {tsb_category: "fresh", objective: "competición", target_duration_min: 45}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "Caso opener."
+
+- id: OP008
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "ponme algo de recuperación activa para hoy"
+  athlete_context: {tsb_category: "very_fatigued", objective: "recuperar", target_duration_min: 45}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "Recovery abierta."
+
+- id: OP009
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "quiero trabajar torque en subida este viernes"
+  athlete_context: {tsb_category: "normal", objective: "fuerza específica", target_duration_min: 100}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "Fuerza específica sin estructura."
+
+- id: OP010
+  group: "stateless"
+  category: "librarian_workout_editor"
+  date: "2026-06-06"
+  user_query: "para el día 20 quiero un entreno de tempo"
+  athlete_context: {tsb_category: "normal", objective: "tempo", target_duration_min: 90}
+  expected_agents: ["librarian", "workout_editor"]
+  notes: "Fecha absoluta con petición abierta."
+
+- id: OP011
+  group: "stateless"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "ponme 40 minutos de Z2 mañana"
+  athlete_context: {tsb_category: "fatigued", objective: "base", target_duration_min: 40}
+  expected_agents: ["workout_editor"]
+  notes: "Duración exacta y tipo exacto."
+
+- id: OP012
+  group: "stateless"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "quiero 4x10 a Z4 para hoy"
+  athlete_context: {tsb_category: "fresh", objective: "FTP", target_duration_min: 75}
+  expected_agents: ["workout_editor"]
+  notes: "Estructura explícita."
+
+- id: OP013
+  group: "stateless"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "ponme 2x20 sweet spot el sábado"
+  athlete_context: {tsb_category: "fresh", objective: "sweetspot", target_duration_min: 95}
+  expected_agents: ["workout_editor"]
+  notes: "Bloques concretos."
+
+- id: OP014
+  group: "stateless"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "para el jueves ponme 3 bloques de 12 minutos cerca del FTP"
+  athlete_context: {tsb_category: "fresh", objective: "FTP", target_duration_min: 80}
+  expected_agents: ["workout_editor"]
+  notes: "Trabajo detallado sin necesidad de librarian."
+
+- id: OP015
+  group: "stateless"
+  category: "nutrition_editor"
+  date: "2026-06-06"
+  user_query: "añádeme la nutrición del entreno de mañana"
+  athlete_context: {tsb_category: "normal", objective: "nutrición"}
+  expected_agents: ["nutrition_editor"]
+  notes: "Solo nutrición."
+
+- id: OP016
+  group: "stateless"
+  category: "nutrition_editor"
+  date: "2026-06-06"
+  user_query: "ponme nutrición de carrera para el día 20"
+  athlete_context: {tsb_category: "normal", objective: "nutrición carrera"}
+  expected_agents: ["nutrition_editor"]
+  notes: "Creación nutricional específica."
+
+- id: OP017
+  group: "stateless"
+  category: "workout_editor_nutrition_editor"
+  date: "2026-06-06"
+  user_query: "ponme 90 minutos de fondo mañana y añádeme la nutrición"
+  athlete_context: {tsb_category: "normal", objective: "resistencia", target_duration_min: 90}
+  expected_agents: ["workout_editor", "nutrition_editor"]
+  notes: "Entreno exacto y nutrición."
+
+- id: OP018
+  group: "stateless"
+  category: "librarian_workout_editor_nutrition_editor"
+  date: "2026-06-06"
+  user_query: "quiero un entreno de VO2max para mañana con la nutrición incluida"
+  athlete_context: {tsb_category: "fresh", objective: "VO2max", target_duration_min: 65}
+  expected_agents: ["librarian", "workout_editor", "nutrition_editor"]
+  notes: "Petición abierta de workout más nutrición."
+
+- id: OP019
+  group: "stateless"
+  category: "week_planner"
+  date: "2026-06-06"
+  user_query: "planifícame la semana que viene"
+  athlete_context: {tsb_category: "normal", objective: "plan semanal"}
+  expected_agents: ["week_planner"]
+  notes: "Semana genérica."
+
+- id: OP020
+  group: "stateless"
+  category: "week_planner"
+  date: "2026-06-06"
+  user_query: "hazme una semana de carga con un día de VO2max y otro de sweet spot"
+  athlete_context: {tsb_category: "fresh", objective: "carga"}
+  expected_agents: ["week_planner"]
+  notes: "Plan semanal con enfoque."
+
+- id: OP021
+  group: "stateless"
+  category: "week_planner"
+  date: "2026-06-06"
+  user_query: "quiero una semana de recuperación porque vengo muy cansado"
+  athlete_context: {tsb_category: "very_fatigued", objective: "recuperar"}
+  expected_agents: ["week_planner"]
+  notes: "Semana recovery."
+
+- id: OP022
+  group: "stateless"
+  category: "explainer"
+  date: "2026-06-06"
+  user_query: "qué significa sweet spot"
+  athlete_context: {tsb_category: "normal"}
+  expected_agents: ["explainer"]
+  notes: "Pregunta conceptual simple."
+
+- id: OP023
+  group: "stateless"
+  category: "explainer"
+  date: "2026-06-06"
+  user_query: "explícame la diferencia entre tempo y umbral"
+  athlete_context: {tsb_category: "normal"}
+  expected_agents: ["explainer"]
+  notes: "Comparativa conceptual."
+
+- id: OP024
+  group: "stateless"
+  category: "explainer"
+  date: "2026-06-06"
+  user_query: "qué es el TSB y cómo afecta a mis entrenos"
+  athlete_context: {tsb_category: "normal"}
+  expected_agents: ["explainer"]
+  notes: "Explicación de métrica."
+
+# ---------------------------------------------------------------------------
+# BLOQUE 2: QUERIES QUE REQUIEREN current_workout
+# Aquí el mensaje presupone que ya existe un entreno cargado en el día o fecha.
+# En el experimento, el state debe incluir current_workout para ese date.
+# ---------------------------------------------------------------------------
+
+- id: OP025
+  group: "requires_current_workout"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "alárgame el entreno de hoy 20 minutos"
+  athlete_context: {tsb_category: "normal", objective: "resistencia"}
+  current_workout:
+    title: "EB-06 | Endurance Z2 60min"
+    status: "planned"
+    planned_duration_s: 3600
+  expected_agents: ["workout_editor"]
+  notes: "Edición de duración sobre entreno existente."
+
+- id: OP026
+  group: "requires_current_workout"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "acórtame el entreno de hoy a 50 minutos"
+  athlete_context: {tsb_category: "fatigued", objective: "descargar"}
+  current_workout:
+    title: "TH-04 | 3x12 Cruise FTP"
+    status: "planned"
+    planned_duration_s: 4800
+  expected_agents: ["workout_editor"]
+  notes: "Acortar entreno actual."
+
+- id: OP027
+  group: "requires_current_workout"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "cambia el entreno de hoy por descanso porque no me encuentro bien"
+  athlete_context: {tsb_category: "fatigued", objective: "recuperar"}
+  current_workout:
+    title: "VO2-02 | 4x4 VO2max clásico"
+    status: "planned"
+    planned_duration_s: 4200
+  expected_agents: ["workout_editor"]
+  notes: "Sustitución por descanso."
+
+- id: OP028
+  group: "requires_current_workout"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "cancela el entreno de hoy"
+  athlete_context: {tsb_category: "normal"}
+  current_workout:
+    title: "SS-02 | 2x20 Sweet Spot clásico"
+    status: "planned"
+    planned_duration_s: 5700
+  expected_agents: ["workout_editor"]
+  notes: "Operación de estado."
+
+- id: OP029
+  group: "requires_current_workout"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "marca como completado el entreno de hoy"
+  athlete_context: {tsb_category: "normal"}
+  current_workout:
+    title: "EB-03 | Fondo Z2 largo 120min"
+    status: "planned"
+    planned_duration_s: 7200
+  expected_agents: ["workout_editor"]
+  notes: "Status complete."
+
+- id: OP030
+  group: "requires_current_workout"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "haz el entreno de hoy más suave"
+  athlete_context: {tsb_category: "fatigued"}
+  current_workout:
+    title: "TH-02 | 3x8 FTP compacto"
+    status: "planned"
+    planned_duration_s: 4200
+  expected_agents: ["workout_editor"]
+  notes: "Modificación cualitativa de intensidad."
+
+- id: OP031
+  group: "requires_current_workout"
+  category: "nutrition_editor"
+  date: "2026-06-06"
+  user_query: "ajústame la nutrición del entreno de hoy a 60 gramos por hora"
+  athlete_context: {tsb_category: "normal"}
+  current_workout:
+    title: "EB-08 | Endurance Z2 120min"
+    status: "planned"
+    planned_duration_s: 7200
+  expected_agents: ["nutrition_editor"]
+  notes: "Edición de nutrición sobre entreno existente."
+
+- id: OP032
+  group: "requires_current_workout"
+  category: "nutrition_editor"
+  date: "2026-06-06"
+  user_query: "quita la nutrición del entreno de hoy"
+  athlete_context: {tsb_category: "normal"}
+  current_workout:
+    title: "TH-05 | Over FTP crono"
+    status: "planned"
+    planned_duration_s: 5400
+  expected_agents: ["nutrition_editor"]
+  notes: "Eliminación de nutrición."
+
+- id: OP033
+  group: "requires_current_workout"
+  category: "workout_editor_nutrition_editor"
+  date: "2026-06-06"
+  user_query: "haz el entreno de hoy más corto y actualiza también la nutrición"
+  athlete_context: {tsb_category: "fatigued"}
+  current_workout:
+    title: "EB-07 | Endurance Z2 90min"
+    status: "planned"
+    planned_duration_s: 5400
+  expected_agents: ["workout_editor", "nutrition_editor"]
+  notes: "Edita workout y nutrición a la vez."
+
+- id: OP034
+  group: "requires_current_workout"
+  category: "workout_editor"
+  date: "2026-06-20"
+  user_query: "para el día 20 cámbiame el entreno por uno de recuperación"
+  athlete_context: {tsb_category: "fatigued", objective: "recuperar"}
+  current_workout:
+    title: "VO2-03 | 5x4 VO2max climbing"
+    status: "planned"
+    planned_duration_s: 4500
+  expected_agents: ["workout_editor"]
+  notes: "Cambio sobre fecha absoluta."
+
+- id: OP035
+  group: "requires_current_workout"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "sáltame el entreno de hoy"
+  athlete_context: {tsb_category: "fatigued"}
+  current_workout:
+    title: "SP-02 | 10x12s Sprints fuerza"
+    status: "planned"
+    planned_duration_s: 3300
+  expected_agents: ["workout_editor"]
+  notes: "Otra forma de operación de estado."
+
+# ---------------------------------------------------------------------------
+# BLOQUE 3: QUERIES QUE REQUIEREN conversation_history
+# Aquí el mensaje actual es elíptico o referencial. Sin historial no tiene sentido.
+# current_workout puede acompañar o no, según el caso.
+# ---------------------------------------------------------------------------
+
+- id: OP036
+  group: "requires_conversation_history"
+  category: "workout_editor"
+  date: "2026-06-06"
+  user_query: "mejor hazlo más suave"
+  athlete_context: {tsb_category: "fatigued"}
+  current_workout:
+    title: "TH-04 | 3x12 Cruise FTP"
+    status: "planned"
+    planned_duration_s: 4800
+  conversation_history:
+    - role: "user"
+      content: "ponme un entreno de umbral para hoy"
+    - role: "assistant"
+      content: "Te he preparado una sesión de umbral para hoy."
+  expected_agents: ["workout_editor"]
+  notes: "Reformulación contextual sobre el entreno recién decidido."
+
+- id: OP037
+  group: "requires_conversation_history"
+  category: "nutrition_editor"
+  date: "2026-06-06"
+  user_query: "añádele también la nutrición"
+  athlete_context: {tsb_category: "normal"}
+  current_workout:
+    title: "EB-06 | Endurance Z2 60min"
+    status: "planned"
+    planned_duration_s: 3600
+  conversation_history:
+    - role: "user"
+      content: "ponme 60 minutos de Z2 mañana"
+    - role: "assistant"
+      content: "Te he dejado un entreno de 60 minutos de Z2 para mañana."
+  expected_agents: ["nutrition_editor"]
+  notes: "Petición anafórica sobre el entreno previo."
+
+- id: OP038
+  group: "requires_conversation_history"
+  category: "workout_editor_nutrition_editor"
+  date: "2026-06-06"
+  user_query: "vale, pero acórtalo y súbeme un poco los carbohidratos"
+  athlete_context: {tsb_category: "normal"}
+  current_workout:
+    title: "EB-08 | Endurance Z2 120min"
+    status: "planned"
+    planned_duration_s: 7200
+  conversation_history:
+    - role: "user"
+      content: "ponme un fondo largo mañana con nutrición"
+    - role: "assistant"
+      content: "Te he dejado un fondo largo para mañana con nutrición asociada."
+  expected_agents: ["workout_editor", "nutrition_editor"]
+  notes: "Query mixta dependiente de contexto previo."
+
+- id: OP039
+  group: "requires_conversation_history"
+  category: "explainer"
+  date: "2026-06-06"
+  user_query: "qué significa eso exactamente"
+  athlete_context: {tsb_category: "normal"}
+  conversation_history:
+    - role: "user"
+      content: "quiero una sesión de sweet spot para hoy"
+    - role: "assistant"
+      content: "Te propongo una sesión de sweet spot para hoy."
+  expected_agents: ["explainer"]
+  notes: "Pregunta de aclaración puramente explicativa."
+
+- id: OP040
+  group: "requires_conversation_history"
+  category: "week_planner"
+  date: "2026-06-06"
+  user_query: "mejor hazla más suave porque sigo cansado"
+  athlete_context: {tsb_category: "fatigued"}
+  conversation_history:
+    - role: "user"
+      content: "planifícame la semana que viene"
+    - role: "assistant"
+      content: "Te he preparado una semana equilibrada para la próxima semana."
+  expected_agents: ["week_planner"]
+  notes: "Ajuste de un plan semanal previamente solicitado."

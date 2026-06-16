@@ -1,0 +1,219 @@
+.page {
+  min-height: 100vh;
+  background: #f0f0f0;
+  padding: 32px 0 80px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.topNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f0f14;
+  margin: 0 0 4px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.pageSubtitle {
+  font-size: 1rem;
+  color: rgba(15,15,20,0.55);
+  margin: 0 0 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid #ececf3;
+  box-shadow: 0 14px 32px rgba(32,18,58,0.06);
+  padding: 24px 28px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.cardHeader {
+  margin-bottom: 16px;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.cardDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f0f14;
+  margin: 0;
+}
+
+.cardSubtitle {
+  font-size: 0.875rem;
+  color: rgba(15,15,20,0.55);
+  margin: 0;
+  padding-left: 20px;
+}
+
+.chartWrap {
+  width: 100%;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 0;
+  color: rgba(15,15,20,0.45);
+  font-size: 0.95rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.syncRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.syncBtn {
+  padding: 10px 22px;
+  border-radius: 12px;
+  background: #6366f1;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.syncBtn:hover:not(:disabled) {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.syncBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.syncMsg {
+  font-size: 0.875rem;
+  color: rgba(15,15,20,0.6);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Top row: sync button + summary panel */
+.topRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* Summary panel */
+.summaryPanel {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #ececf3;
+  box-shadow: 0 8px 24px rgba(32,18,58,0.06);
+  padding: 16px 24px;
+  min-width: 320px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.summaryMetrics {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 10px;
+}
+
+.summaryMetric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  gap: 2px;
+}
+
+.summaryDivider {
+  width: 1px;
+  height: 40px;
+  background: rgba(15,15,20,0.08);
+}
+
+.summaryValue {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.summaryKey {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.summaryHint {
+  font-size: 0.75rem;
+  color: rgba(15,15,20,0.55);
+  font-weight: 500;
+}
+
+.summaryDesc {
+  font-size: 0.8rem;
+  color: rgba(15,15,20,0.6);
+  margin: 0;
+  text-align: center;
+  line-height: 1.4;
+  border-top: 1px solid rgba(15,15,20,0.06);
+  padding-top: 8px;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.45);
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin-bottom: 0;
+  display: inline-block;
+  transition: color 0.15s;
+  align-self: flex-start;
+}
+
+.backBtn:hover { color: #0f0f14; }

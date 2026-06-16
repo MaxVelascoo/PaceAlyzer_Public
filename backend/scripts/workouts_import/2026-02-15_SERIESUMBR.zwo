@@ -1,0 +1,51 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>SERIES UMBRAL PROGRESIVAS 2.0</name>
+	<description>OBJETIVO: Desarrollar la resistencia y la capacidad de mantener una intensidad progresiva a lo largo de las series, cumpliendo con los parámetros de potencia establecidos.
+__________________________________________
+
+EJECUCIÓN: Realizar las series en subida.
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<SteadyState Duration="1200" Power="0.75">
+		</SteadyState>
+		<SteadyState Duration="240" Power="0.93">
+		</SteadyState>
+		<SteadyState Duration="240" Power="0.98">
+		</SteadyState>
+		<SteadyState Duration="240" Power="1.03">
+		</SteadyState>
+		<SteadyState Duration="240" Power="1.08">
+		</SteadyState>
+		<SteadyState Duration="1200" Power="0.75">
+		</SteadyState>
+		<SteadyState Duration="240" Power="0.93">
+		</SteadyState>
+		<SteadyState Duration="240" Power="0.98">
+		</SteadyState>
+		<SteadyState Duration="240" Power="1.03">
+		</SteadyState>
+		<SteadyState Duration="240" Power="1.08">
+		</SteadyState>
+		<SteadyState Duration="1200" Power="0.75">
+		</SteadyState>
+		<SteadyState Duration="240" Power="0.93">
+		</SteadyState>
+		<SteadyState Duration="240" Power="0.98">
+		</SteadyState>
+		<SteadyState Duration="240" Power="1.03">
+		</SteadyState>
+		<SteadyState Duration="240" Power="1.08">
+		</SteadyState>
+		<SteadyState Duration="4320" Power="0.75">
+		</SteadyState>
+	</workout>
+</workout_file>

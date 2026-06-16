@@ -1,0 +1,63 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>ARRANCADAS Z6 (10&quot; - 30&quot;)</name>
+	<description>OBJETIVO: Mejorar la explosividad y la capacidad anaeróbica, así como la fuerza muscular. Este enfoque se centra en desarrollar potencia y resistencia, optimizando el rendimiento en esfuerzos intensos y prolongados.
+______________________________________
+
+EJECUCIÓN: La potencia que te marca TP para las series no es la real, haz las series a la máxima potencia que puedas.
+______________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1200" PowerHigh="0.55" PowerLow="0.35">
+		</Warmup>
+		<SteadyState Duration="30" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="180" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="10" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="30" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="180" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="10" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="30" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="180" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="10" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="30" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="180" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="10" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="30" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="180" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="10" Power="2.1">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="1900" Power="0.55">
+		</SteadyState>
+	</workout>
+</workout_file>

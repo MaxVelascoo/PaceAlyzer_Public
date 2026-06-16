@@ -1,0 +1,440 @@
+---
+- id: Q001
+  user_query: "dame un entreno de umbral"
+  athlete_context: {target_duration_min: 70, tsb_category: "normal", objective: "mejorar rendimiento"}
+  expected:
+    primary_goal: "threshold"
+    work_zone: "Z4"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["normal_or_fresh", "fresh_only"]
+    duration_class_any_of: ["short", "medium"]
+    relevant_title_prefixes: ["TH-01", "TH-02", "TH-03", "TH-04", "TH-05", "TH-06", "TH-07"]
+
+- id: Q002
+  user_query: "quiero trabajar FTP en intervalos largos"
+  athlete_context: {target_duration_min: 90, tsb_category: "fresh", objective: "subir FTP"}
+  expected:
+    primary_goal: "threshold"
+    work_zone: "Z4"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only", "normal_or_fresh"]
+    duration_class_any_of: ["medium"]
+    relevant_title_prefixes: ["TH-04", "TH-05", "TH-06", "TH-07"]
+
+- id: Q003
+  user_query: "ponme umbral en subida para el sábado"
+  athlete_context: {target_duration_min: 140, tsb_category: "fresh", objective: "mejorar subida"}
+  expected:
+    primary_goal: "threshold"
+    work_zone_any_of: ["Z4", "Z4_Z5"]
+    structure_type_any_of: ["long_intervals", "mixed"]
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["long"]
+    relevant_title_prefixes: ["TH-06", "TH-07"]
+
+- id: Q004
+  user_query: "necesito un entrenamiento de threshold corto en rodillo"
+  athlete_context: {target_duration_min: 60, tsb_category: "normal", objective: "mantener FTP"}
+  expected:
+    primary_goal: "threshold"
+    work_zone: "Z4"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["normal_or_fresh", "fresh_only"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["TH-01", "TH-02", "TH-03"]
+
+- id: Q005
+  user_query: "quiero mejorar mi crono con bloques cerca del FTP"
+  athlete_context: {target_duration_min: 100, tsb_category: "fresh", objective: "contrarreloj"}
+  expected:
+    primary_goal: "threshold"
+    work_zone: "Z4"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["medium"]
+    relevant_title_prefixes: ["TH-05", "TH-04"]
+
+- id: Q006
+  user_query: "para mañana quiero algo para recuperar piernas"
+  athlete_context: {target_duration_min: 45, tsb_category: "very_fatigued", objective: "recuperar"}
+  expected:
+    primary_goal: "recovery"
+    work_zone: "Z1"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["very_fatigued_ok", "fatigued_ok"]
+    duration_class_any_of: ["very_short", "short"]
+    relevant_title_prefixes: ["RC-", "1:30 COFFEE", "1:30 RECUPERACIÓN"]
+
+- id: Q007
+  user_query: "estoy muy cansado, dame solo recuperación suave"
+  athlete_context: {target_duration_min: 35, tsb_category: "very_fatigued", objective: "recuperar"}
+  expected:
+    primary_goal: "recovery"
+    work_zone: "Z1"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["very_fatigued_ok"]
+    duration_class_any_of: ["very_short", "short"]
+    relevant_title_prefixes: ["RC-01", "RC-02", "RC-03", "RC-04"]
+
+- id: Q008
+  user_query: "quiero soltar piernas después de una carrera"
+  athlete_context: {target_duration_min: 30, tsb_category: "very_fatigued", objective: "recuperar"}
+  expected:
+    primary_goal: "recovery"
+    work_zone: "Z1"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["very_fatigued_ok"]
+    duration_class_any_of: ["very_short"]
+    relevant_title_prefixes: ["RC-01", "RC-02"]
+
+- id: Q009
+  user_query: "ponme una recuperación activa de una hora"
+  athlete_context: {target_duration_min: 60, tsb_category: "fatigued", objective: "recuperar"}
+  expected:
+    primary_goal: "recovery"
+    work_zone: "Z1"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["very_fatigued_ok", "fatigued_ok"]
+    duration_class_any_of: ["short", "medium"]
+    relevant_title_prefixes: ["RC-05", "1:30 COFFEE", "1:30 RECUPERACIÓN"]
+
+- id: Q010
+  user_query: "quiero rodar muy suave para descargar"
+  athlete_context: {target_duration_min: 50, tsb_category: "very_fatigued", objective: "descarga"}
+  expected:
+    primary_goal: "recovery"
+    work_zone: "Z1"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["very_fatigued_ok", "fatigued_ok"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["RC-02", "RC-03", "RC-04", "RC-05"]
+
+- id: Q011
+  user_query: "para el sábado ponme un entreno VO2max corto en rodillo"
+  athlete_context: {target_duration_min: 60, tsb_category: "fresh", objective: "mejorar VO2max"}
+  expected:
+    primary_goal: "vo2max"
+    work_zone: "Z5"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["VO2-01", "VO2-02"]
+
+- id: Q012
+  user_query: "quiero hacer 4x4 de VO2max"
+  athlete_context: {target_duration_min: 65, tsb_category: "fresh", objective: "mejorar VO2max"}
+  expected:
+    primary_goal: "vo2max"
+    work_zone: "Z5"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["VO2-02"]
+
+- id: Q013
+  user_query: "necesito VO2max largo en subida"
+  athlete_context: {target_duration_min: 75, tsb_category: "fresh", objective: "subida"}
+  expected:
+    primary_goal: "vo2max"
+    work_zone: "Z5"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["short", "medium"]
+    relevant_title_prefixes: ["VO2-03", "VO2-04", "VO2-09"]
+
+- id: Q014
+  user_query: "ponme una escalera de VO2max"
+  athlete_context: {target_duration_min: 90, tsb_category: "fresh", objective: "mejorar VO2max"}
+  expected:
+    primary_goal: "vo2max"
+    work_zone: "Z5"
+    structure_type: "pyramid_ladder"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["medium"]
+    relevant_title_prefixes: ["VO2-05"]
+
+- id: Q015
+  user_query: "quiero trabajar potencia aeróbica máxima con series de 3 minutos"
+  athlete_context: {target_duration_min: 60, tsb_category: "fresh", objective: "mejorar PAM"}
+  expected:
+    primary_goal: "vo2max"
+    work_zone: "Z5"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["VO2-01"]
+
+- id: Q016
+  user_query: "quiero sprints de fuerza o arrancadas"
+  athlete_context: {target_duration_min: 55, tsb_category: "fresh", objective: "mejorar explosividad"}
+  expected:
+    primary_goal_any_of: ["neuromuscular_sprint", "strength_torque"]
+    work_zone: "Z6_Z7"
+    structure_type_any_of: ["sprints", "torque_sprints"]
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["SP-02", "SP-03", "ST-03", "ST-04"]
+
+- id: Q017
+  user_query: "necesito mejorar mi pico de potencia con sprints cortos"
+  athlete_context: {target_duration_min: 50, tsb_category: "fresh", objective: "sprint"}
+  expected:
+    primary_goal: "neuromuscular_sprint"
+    work_zone: "Z6_Z7"
+    structure_type: "sprints"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["short", "very_short"]
+    relevant_title_prefixes: ["SP-01", "SP-02", "SP-03", "SP-04"]
+
+- id: Q018
+  user_query: "quiero sprints en cuesta"
+  athlete_context: {target_duration_min: 60, tsb_category: "fresh", objective: "explosividad en subida"}
+  expected:
+    primary_goal: "neuromuscular_sprint"
+    work_zone: "Z6_Z7"
+    structure_type: "sprints"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["SP-03"]
+
+- id: Q019
+  user_query: "ponme un entrenamiento de alta cadencia y coordinación neuromuscular"
+  athlete_context: {target_duration_min: 45, tsb_category: "fresh", objective: "coordinación"}
+  expected:
+    primary_goal: "neuromuscular_sprint"
+    work_zone: "Z6_Z7"
+    structure_type: "sprints"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["very_short", "short"]
+    relevant_title_prefixes: ["SP-04"]
+
+- id: Q020
+  user_query: "quiero practicar sprint final después de rodar un poco"
+  athlete_context: {target_duration_min: 75, tsb_category: "fresh", objective: "final de carrera"}
+  expected:
+    primary_goal: "neuromuscular_sprint"
+    work_zone: "Z6_Z7"
+    structure_type: "sprints"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["SP-05"]
+
+- id: Q021
+  user_query: "quiero trabajar torque a baja cadencia en subida"
+  athlete_context: {target_duration_min: 100, tsb_category: "normal", objective: "fuerza específica"}
+  expected:
+    primary_goal: "strength_torque"
+    work_zone_any_of: ["Z3_Z4", "Z6_Z7"]
+    structure_type: "torque_sprints"
+    fatigue_suitability_any_of: ["normal_or_fresh", "fresh_only"]
+    duration_class_any_of: ["medium", "long"]
+    relevant_title_prefixes: ["ST-05", "ST-06", "ST-03", "ST-04"]
+
+- id: Q022
+  user_query: "ponme series de fuerza específica con mucho desarrollo"
+  athlete_context: {target_duration_min: 110, tsb_category: "normal", objective: "fuerza específica"}
+  expected:
+    primary_goal: "strength_torque"
+    work_zone_any_of: ["Z3_Z4", "Z6_Z7"]
+    structure_type: "torque_sprints"
+    fatigue_suitability_any_of: ["normal_or_fresh", "fresh_only"]
+    duration_class_any_of: ["medium", "long"]
+    relevant_title_prefixes: ["ST-05", "ST-06", "ST-03", "ST-04"]
+
+- id: Q023
+  user_query: "quiero arrancadas de torque sentado"
+  athlete_context: {target_duration_min: 120, tsb_category: "fresh", objective: "torque"}
+  expected:
+    primary_goal: "strength_torque"
+    work_zone: "Z6_Z7"
+    structure_type: "torque_sprints"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["long"]
+    relevant_title_prefixes: ["ST-03", "ST-04"]
+
+- id: Q024
+  user_query: "quiero fuerza resistencia a baja cadencia"
+  athlete_context: {target_duration_min: 100, tsb_category: "normal", objective: "fuerza resistencia"}
+  expected:
+    primary_goal: "strength_torque"
+    work_zone: "Z3_Z4"
+    structure_type: "torque_sprints"
+    fatigue_suitability_any_of: ["normal_or_fresh"]
+    duration_class_any_of: ["medium"]
+    relevant_title_prefixes: ["ST-05", "ST-06"]
+
+- id: Q025
+  user_query: "ponme fondo Z2 largo"
+  athlete_context: {target_duration_min: 180, tsb_category: "normal", objective: "resistencia"}
+  expected:
+    primary_goal: "endurance"
+    work_zone: "Z2"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["normal_or_fresh", "fresh_only"]
+    duration_class_any_of: ["long"]
+    relevant_title_prefixes: ["EB-04", "EB-05", "ENDURANCE 3:00", "ENDURANCE 4:00", "ENDURANCE 5:00"]
+
+- id: Q026
+  user_query: "quiero un rodaje endurance de una hora"
+  athlete_context: {target_duration_min: 60, tsb_category: "fatigued", objective: "resistencia"}
+  expected:
+    primary_goal: "endurance"
+    work_zone: "Z2"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["fatigued_ok", "normal_or_fresh"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["EB-01", "ENDURANCE 1:00"]
+
+- id: Q027
+  user_query: "necesito construir base aeróbica sin intensidad"
+  athlete_context: {target_duration_min: 90, tsb_category: "fatigued", objective: "base aeróbica"}
+  expected:
+    primary_goal: "endurance"
+    work_zone: "Z2"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["fatigued_ok", "normal_or_fresh"]
+    duration_class_any_of: ["short", "medium"]
+    relevant_title_prefixes: ["EB-01", "EB-02", "ENDURANCE 1:00", "ENDURANCE 1:30"]
+
+- id: Q028
+  user_query: "ponme una tirada larga para gran fondo"
+  athlete_context: {target_duration_min: 180, tsb_category: "fresh", objective: "granfondo"}
+  expected:
+    primary_goal: "endurance"
+    work_zone: "Z2"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["fresh_only", "normal_or_fresh"]
+    duration_class_any_of: ["long"]
+    relevant_title_prefixes: ["EB-04", "EB-05", "ENDURANCE 3:00", "ENDURANCE 4:00"]
+
+- id: Q029
+  user_query: "quiero Z2 de 2 horas para mejorar durabilidad"
+  athlete_context: {target_duration_min: 120, tsb_category: "normal", objective: "durabilidad"}
+  expected:
+    primary_goal: "endurance"
+    work_zone: "Z2"
+    structure_type: "steady"
+    fatigue_suitability_any_of: ["normal_or_fresh", "fresh_only"]
+    duration_class_any_of: ["medium"]
+    relevant_title_prefixes: ["EB-03", "ENDURANCE 2:00"]
+
+- id: Q030
+  user_query: "dame sweet spot compacto"
+  athlete_context: {target_duration_min: 70, tsb_category: "normal", objective: "mejorar FTP"}
+  expected:
+    primary_goal: "sweetspot"
+    work_zone: "Z3_Z4"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["normal_or_fresh", "fresh_only"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["SS-01", "SS-02", "SS-03"]
+
+- id: Q031
+  user_query: "quiero 2x20 sweet spot"
+  athlete_context: {target_duration_min: 75, tsb_category: "normal", objective: "resistencia muscular"}
+  expected:
+    primary_goal: "sweetspot"
+    work_zone: "Z3_Z4"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["normal_or_fresh"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["SS-02"]
+
+- id: Q032
+  user_query: "ponme sweet spot largo para gran fondo"
+  athlete_context: {target_duration_min: 105, tsb_category: "fresh", objective: "granfondo"}
+  expected:
+    primary_goal: "sweetspot"
+    work_zone: "Z3_Z4"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["medium", "long"]
+    relevant_title_prefixes: ["SS-04", "SS-05", "SS-08", "SS-09"]
+
+- id: Q033
+  user_query: "quiero trabajo subumbral de 3x15"
+  athlete_context: {target_duration_min: 90, tsb_category: "fresh", objective: "TTE"}
+  expected:
+    primary_goal: "sweetspot"
+    work_zone: "Z3_Z4"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["medium", "long"]
+    relevant_title_prefixes: ["SS-04", "SS-09"]
+
+- id: Q034
+  user_query: "dame tempo largo de 2x30"
+  athlete_context: {target_duration_min: 140, tsb_category: "fresh", objective: "capacidad aeróbica"}
+  expected:
+    primary_goal: "tempo"
+    work_zone: "Z3"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["long"]
+    relevant_title_prefixes: ["TP-02"]
+
+- id: Q035
+  user_query: "quiero tempo para mejorar resistencia muscular"
+  athlete_context: {target_duration_min: 140, tsb_category: "fresh", objective: "resistencia muscular"}
+  expected:
+    primary_goal: "tempo"
+    work_zone: "Z3"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["long"]
+    relevant_title_prefixes: ["TP-02", "TP-03", "TP-04"]
+
+- id: Q036
+  user_query: "ponme un tempo fragmentado de 4x10"
+  athlete_context: {target_duration_min: 140, tsb_category: "fresh", objective: "tempo"}
+  expected:
+    primary_goal: "tempo"
+    work_zone: "Z3"
+    structure_type: "long_intervals"
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["long"]
+    relevant_title_prefixes: ["TP-04"]
+
+- id: Q037
+  user_query: "quiero una activación pre carrera"
+  athlete_context: {target_duration_min: 45, tsb_category: "fresh", objective: "competición mañana"}
+  expected:
+    primary_goal: "activation_pre_race"
+    work_zone_any_of: ["Z1", "mixed"]
+    structure_type_any_of: ["sprints", "mixed", "pyramid_ladder"]
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["very_short", "short"]
+    relevant_title_prefixes: ["PC-01"]
+
+- id: Q038
+  user_query: "mañana compito, quiero abrir piernas sin fatigarme"
+  athlete_context: {target_duration_min: 40, tsb_category: "fresh", objective: "pre carrera"}
+  expected:
+    primary_goal: "activation_pre_race"
+    work_zone_any_of: ["Z1", "mixed"]
+    structure_type_any_of: ["sprints", "mixed", "pyramid_ladder"]
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["very_short", "short"]
+    relevant_title_prefixes: ["PC-01"]
+
+- id: Q039
+  user_query: "quiero trabajar FRC con esfuerzos de un minuto"
+  athlete_context: {target_duration_min: 60, tsb_category: "fresh", objective: "anaeróbico"}
+  expected:
+    primary_goal: "anaerobic_frc"
+    work_zone: "Z6_Z7"
+    structure_type_any_of: ["short_intervals", "microbursts", "sprints"]
+    fatigue_suitability_any_of: ["fresh_only", "normal_or_fresh"]
+    duration_class_any_of: ["short"]
+    relevant_title_prefixes: ["AN-01"]
+
+- id: Q040
+  user_query: "quiero anaeróbico corto tipo 30/30 para lactato"
+  athlete_context: {target_duration_min: 65, tsb_category: "fresh", objective: "capacidad anaeróbica"}
+  expected:
+    primary_goal: "anaerobic_frc"
+    work_zone: "Z6_Z7"
+    structure_type_any_of: ["microbursts", "short_intervals"]
+    fatigue_suitability_any_of: ["fresh_only"]
+    duration_class_any_of: ["short", "medium"]
+    relevant_title_prefixes: ["AN-05", "RESISTENCIA LACTICA", "Cap. Anaerobica"]

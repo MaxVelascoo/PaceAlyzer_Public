@@ -1,0 +1,24 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>CRTA l 2x45&apos; Tempo (15&apos;)</name>
+	<description>Rangos prefijados abajo, tiempo y intensidad de trabajo. Intenta mantener estable potencia media y NP del intervalo.
+
+En llano o picando para arriba
+
+objetivos:
+- Aumento de la actividad tamponante del músculo.
+- Aumento de las capacidades oxidativas de las fibras lentas.
+-Eliminación de productos del metabolismo anaeróbico láctico.
+
+flexibilidad al terminar.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1800" PowerHigh="0.73" PowerLow="0.53">
+		</Warmup>
+		<IntervalsT Repeat="2" OnDuration="2700" OnPower="0.85" OffDuration="900" OffPower="0.55">
+		</IntervalsT>
+		<Cooldown Duration="1800" PowerHigh="0.5" PowerLow="0.7">
+		</Cooldown>
+	</workout>
+</workout_file>

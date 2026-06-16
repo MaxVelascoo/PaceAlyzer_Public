@@ -1,0 +1,38 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>RESISTENCIA LACTICA (20/20)</name>
+	<description>OBJETIVO: Mejorar la capacidad anaeróbica y la potencia máxima a través de intervalos cortos en el entrenamiento Billat, optimizando la tolerancia al lactato y aumentando la eficiencia en el uso del oxígeno para un mejor rendimiento en esfuerzos intensos.
+__________________________________________
+
+EJECUCIÓN: Buscar una subida de 10&apos;
+20&quot; fuerte + 20&quot; min suave
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1200" PowerHigh="0.7" PowerLow="0.5">
+		</Warmup>
+		<IntervalsT Repeat="15" OnDuration="20" OnPower="1.25" OffDuration="20" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.6">
+		</SteadyState>
+		<IntervalsT Repeat="15" OnDuration="20" OnPower="1.25" OffDuration="20" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.6">
+		</SteadyState>
+		<IntervalsT Repeat="15" OnDuration="20" OnPower="1.25" OffDuration="20" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.6">
+		</SteadyState>
+		<IntervalsT Repeat="15" OnDuration="20" OnPower="1.25" OffDuration="20" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1800" Power="0.6">
+		</SteadyState>
+	</workout>
+</workout_file>

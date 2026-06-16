@@ -1,0 +1,24 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>ENDURANCE + FRC 6 X 1´</name>
+	<description>OBJETIVO: Mejorar la capacidad anaeróbica y la producción de potencia mediante el trabajo de FRC (Functional Reserve Capacity). Este enfoque ayuda a maximizar la eficiencia energética y a mantener esfuerzos intensos, optimizando el rendimiento en sprints y escaladas​.
+__________________________________________
+
+EJECUCIÓN: La potencia que te marca TP para las series no es la real, haz las series a la máxima potencia que puedas.
+__________________________________________
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1800" PowerHigh="0.7" PowerLow="0.5">
+		</Warmup>
+		<IntervalsT Repeat="6" OnDuration="60" OnPower="1.8" OffDuration="1200" OffPower="0.6">
+		</IntervalsT>
+		<Cooldown Duration="1440" PowerHigh="0.5" PowerLow="0.7">
+		</Cooldown>
+	</workout>
+</workout_file>

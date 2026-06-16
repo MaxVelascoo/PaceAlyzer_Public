@@ -1,0 +1,35 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>SPRINTS</name>
+	<description>OBJETIVO: Mejorar la explosividad y la velocidad mediante sprints, simulando esfuerzos cortos y máximos. Este entrenamiento se centra en aumentar la capacidad de aceleración.
+__________________________________________
+
+EJECUCIÓN: Terreno variado, darlo todo!
+__________________________________________
+
+EJECUCIÓN: La potencia que te marca TP para las series no es la real, haz las series a la máxima potencia que puedas.
+__________________________________________
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1200" PowerHigh="0.7" PowerLow="0.5">
+		</Warmup>
+		<IntervalsT Repeat="4" OnDuration="10" OnPower="2.75" OffDuration="300" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.6">
+		</SteadyState>
+		<IntervalsT Repeat="4" OnDuration="10" OnPower="2.75" OffDuration="300" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.6">
+		</SteadyState>
+		<IntervalsT Repeat="4" OnDuration="10" OnPower="2.75" OffDuration="300" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.55">
+		</SteadyState>
+	</workout>
+</workout_file>

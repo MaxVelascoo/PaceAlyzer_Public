@@ -1,0 +1,24 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>LACTATE RESISTENCE 1.0</name>
+	<description>OBJETIVO: Mejorar la resistencia al lactato mediante intervalos a alta intensidad intercalados con recuperaciones, optimizando la capacidad de mantener esfuerzos intensos en condiciones de fatiga.
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1200" PowerHigh="0.7" PowerLow="0.5">
+		</Warmup>
+		<SteadyState Duration="1800" Power="0.6">
+		</SteadyState>
+		<IntervalsT Repeat="8" OnDuration="120" OnPower="1.15" OffDuration="180" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1800" Power="0.6">
+		</SteadyState>
+	</workout>
+</workout_file>

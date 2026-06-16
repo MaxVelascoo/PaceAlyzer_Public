@@ -1,0 +1,58 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>MICRO INTERVALS (VO2MAX) x15</name>
+	<description>OBJETIVO: Recordatorio trabajo Vo2Max. Estimular el consumo máximo de oxigeno
+______________________________________
+
+EJECUCION: Los intervalos NO SON ATOPE, intensidad alrededor de potencia asociada al Vo2max.
+Realizar a 90-100 de cadencia
+______________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1800" PowerHigh="0.63" PowerLow="0.43">
+		</Warmup>
+		<IntervalsT Repeat="15" OnDuration="30" OnPower="1.2" OffDuration="150" OffPower="0.5">
+			<textevent timeoffset="30" message="
+"/>
+			<textevent timeoffset="210" message="
+"/>
+			<textevent timeoffset="390" message="
+"/>
+			<textevent timeoffset="570" message="
+"/>
+			<textevent timeoffset="750" message="
+"/>
+			<textevent timeoffset="930" message="
+"/>
+			<textevent timeoffset="1110" message="
+"/>
+			<textevent timeoffset="1290" message="
+"/>
+			<textevent timeoffset="1470" message="
+"/>
+			<textevent timeoffset="1650" message="
+"/>
+			<textevent timeoffset="1830" message="
+"/>
+			<textevent timeoffset="2010" message="
+"/>
+			<textevent timeoffset="2190" message="
+"/>
+			<textevent timeoffset="2370" message="
+"/>
+			<textevent timeoffset="2550" message="
+"/>
+		</IntervalsT>
+		<SteadyState Duration="3600" Power="0.66">
+		</SteadyState>
+		<Cooldown Duration="900" PowerHigh="0.35" PowerLow="0.55">
+		</Cooldown>
+	</workout>
+</workout_file>

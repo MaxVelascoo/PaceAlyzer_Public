@@ -1,0 +1,526 @@
+# PaceAlyzer RAG - workout_library schema and embedding_text contract
+# Purpose:
+#   Context for updating the Librarian agent, embedding generation pipeline,
+#   Supabase workout_library table, and RAG evaluation code.
+
+version: "1.0"
+project: "PaceAlyzer"
+module: "RAG workout template retrieval"
+
+workout_library:
+  table_name: "workout_library"
+  purpose: >
+    Stores cycling workout templates used by the Librarian agent. Each row represents
+    one reusable training template. The RAG pipeline retrieves templates from this
+    table using SQL filtering, vector similarity, and reranking.
+
+  existing_columns:
+    id:
+      type: "uuid or text"
+      role: "Primary identifier for each workout template."
+      used_by_rag: true
+      notes: "Always use id in UPDATE statements and joins; do not rely on title uniqueness."
+
+    title:
+      type: "text"
+      role: "Human-readable workout template title."
+      used_by_rag: true
+      notes: >
+        May be normalized for consistency, e.g. 'TH-04 | 3x12 Cruise FTP'.
+        Included in embedding_text.
+
+    description:
+      type: "text"
+      role: "Human-readable workout description."
+      used_by_rag: true
+      notes: >
+        Keep as natural language for UI and human understanding. It should not be
+        overloaded with retrieval-only metadata.
+
+    sport_type:
+      type: "text"
+      role: "Sport filter."
+      used_by_rag: true
+      recommended_values:
+        - "cycling"
+      sql_filter: "sport_type = 'cycling'"
+
+    duration_min:
+      type: "int4"
+      role: "Workout duration in minutes."
+      used_by_rag: true
+      notes: >
+        Use mainly in SQL filtering and duration proximity scoring. Do not rely on
+        exact numeric duration inside the embedding for semantic retrieval.
+      sql_filter: >
+        Filter around target duration, e.g. ±40%, expanded to ±60% if too few candidates.
+
+    intensity_level:
+      type: "text"
+      role: "General intensity level."
+      used_by_rag: partially
+      recommended_values:
+        - "recovery"
+        - "easy"
+        - "moderate"
+        - "hard"
+        - "very_hard"
+      notes: >
+        This is coarse and should not be treated as the main retrieval label.
+        Use primary_goal, work_zone, load_level, and fatigue_suitability for RAG semantics.
+
+    tags:
+      type: "text[]"
+      role: "Free-form domain keywords."
+      used_by_rag: true
+      notes: >
+        Tags should contain curated cycling concepts and synonyms such as FTP,
+        threshold, VO2max, sweetspot, FRC, sprint, torque, endurance, recovery.
+        Included in embedding_text as RELATED_CONCEPTS or TAGS.
+
+    structure:
+      type: "jsonb"
+      role: "Raw workout structure used to build/adapt the workout."
+      used_by_rag: partially
+      notes: >
+        Keep as the detailed workout definition. Do not use it as the only source of
+        retrieval labels. Derive or manually set structure_type for retrieval.
+
+    nutrition_template:
+      type: "jsonb"
+      role: "Optional nutrition guidance."
+      used_by_rag: false
+      notes: "Not relevant for semantic retrieval unless nutrition-specific queries are added later."
+
+    est_tss:
+      type: "float8"
+      role: "Estimated Training Stress Score."
+      used_by_rag: true
+      notes: >
+        Use mainly in reranking through TSS proximity. In embedding_text prefer
+        categorical load_level over exact TSS.
+
+    embedding:
+      type: "vector"
+      role: "Vector representation of embedding_text."
+      used_by_rag: true
+      notes: "Generated with OpenAI text-embedding-3-large."
+
+    embedding_status:
+      type: "text"
+      role: "Embedding lifecycle status."
+      used_by_rag: true
+      recommended_values:
+        - "pending"
+        - "processing"
+        - "ready"
+        - "error"
+      sql_filter: "embedding_status = 'ready'"
+
+    created_at:
+      type: "timestamptz"
+      role: "Creation timestamp."
+      used_by_rag: false
+
+    updated_at:
+      type: "timestamptz"
+      role: "Last update timestamp."
+      used_by_rag: false
+
+  new_columns:
+    primary_goal:
+      type: "text"
+      role: "Main physiological purpose of the workout."
+      used_by_rag: true
+      required: true
+      recommended_values:
+        - "recovery"
+        - "endurance"
+        - "tempo"
+        - "sweetspot"
+        - "threshold"
+        - "vo2max"
+        - "anaerobic_frc"
+        - "neuromuscular_sprint"
+        - "strength_torque"
+        - "activation_pre_race"
+        - "mixed"
+      notes: >
+        This should describe the real training stimulus, not necessarily the zone
+        with the most accumulated time.
+
+    secondary_goals:
+      type: "text[]"
+      role: "Additional training concepts represented by the workout."
+      used_by_rag: true
+      required: true
+      example_values:
+        - "ftp"
+        - "tte"
+        - "pacing"
+        - "lactate_tolerance"
+        - "over_under"
+        - "frc"
+        - "repeatability"
+        - "sprints"
+        - "cadence"
+        - "torque"
+        - "climbing"
+        - "race_prep"
+        - "durability"
+        - "granfondo"
+        - "technique"
+        - "aerobic_capacity"
+        - "maximal_aerobic_power"
+      notes: >
+        Use this field to represent ambiguous or mixed templates. Example:
+        a long endurance ride with FRC reminders should have primary_goal=endurance
+        and secondary_goals including frc, sprints, ftp, durability.
+
+    work_zone:
+      type: "text"
+      role: "Main work zone of the workout stimulus."
+      used_by_rag: true
+      required: true
+      recommended_values:
+        - "Z1"
+        - "Z2"
+        - "Z3"
+        - "Z3_Z4"
+        - "Z4"
+        - "Z5"
+        - "Z6_Z7"
+        - "mixed"
+      notes: >
+        This is not necessarily the dominant zone by total time. For example,
+        threshold workouts should usually be work_zone=Z4 even if warmup and
+        recovery time make Z1/Z2 dominant in the raw structure.
+
+    structure_type:
+      type: "text"
+      role: "Retrieval-level workout structure."
+      used_by_rag: true
+      required: true
+      recommended_values:
+        - "steady"
+        - "long_intervals"
+        - "short_intervals"
+        - "microbursts"
+        - "sprints"
+        - "torque_sprints"
+        - "over_under"
+        - "pyramid_ladder"
+        - "mixed"
+      notes: >
+        This is a semantic summary of the workout structure, not the raw JSON structure.
+
+    fatigue_suitability:
+      type: "text"
+      role: "Fatigue context in which this workout is appropriate."
+      used_by_rag: true
+      required: true
+      recommended_values:
+        - "very_fatigued_ok"
+        - "fatigued_ok"
+        - "normal_or_fresh"
+        - "fresh_only"
+      notes: >
+        This should describe suitability for the athlete state. Hard VO2max,
+        anaerobic, and long threshold sessions should usually be fresh_only.
+
+    load_level:
+      type: "text"
+      role: "Categorical training load."
+      used_by_rag: true
+      required: true
+      recommended_values:
+        - "very_low"
+        - "low"
+        - "medium"
+        - "high"
+        - "very_high"
+      notes: >
+        Use this in embedding_text instead of relying on exact TSS. Exact est_tss
+        remains available for reranking.
+
+    duration_class:
+      type: "text"
+      role: "Categorical duration label for semantic retrieval."
+      used_by_rag: true
+      required: recommended
+      recommended_values:
+        - "very_short"
+        - "short"
+        - "medium"
+        - "long"
+        - "very_long"
+      suggested_mapping:
+        very_short: "0-45 minutes"
+        short: "46-75 minutes"
+        medium: "76-120 minutes"
+        long: "121-180 minutes"
+        very_long: ">180 minutes"
+      notes: >
+        Recommended as a new column. If not added as a physical column, compute it
+        during embedding_text generation from duration_min.
+
+    embedding_text:
+      type: "text"
+      role: "Canonical text used to generate the embedding."
+      used_by_rag: true
+      required: true
+      notes: >
+        Should contain mostly semantic natural language plus controlled labels.
+        Avoid relying on exact numbers for semantic retrieval.
+
+    metadata_status:
+      type: "text"
+      role: "Manual metadata review status."
+      used_by_rag: operational
+      recommended_values:
+        - "pending"
+        - "reviewed"
+        - "needs_review"
+      notes: >
+        Use metadata_status='reviewed' after manual correction of the retrieval metadata.
+
+schema_migration:
+  sql: |
+    ALTER TABLE workout_library
+    ADD COLUMN IF NOT EXISTS primary_goal text,
+    ADD COLUMN IF NOT EXISTS secondary_goals text[],
+    ADD COLUMN IF NOT EXISTS work_zone text,
+    ADD COLUMN IF NOT EXISTS structure_type text,
+    ADD COLUMN IF NOT EXISTS fatigue_suitability text,
+    ADD COLUMN IF NOT EXISTS load_level text,
+    ADD COLUMN IF NOT EXISTS duration_class text,
+    ADD COLUMN IF NOT EXISTS embedding_text text,
+    ADD COLUMN IF NOT EXISTS metadata_status text DEFAULT 'pending';
+
+embedding_text_contract:
+  general_principles:
+    - "Use more semantic text than exact numbers."
+    - "Use a stable structure across all templates."
+    - "Use the same vocabulary in template embedding_text and in Librarian query generation."
+    - "Keep exact duration_min and est_tss in database fields for SQL filtering and reranking."
+    - "Use duration_class and load_level in embedding_text instead of relying on exact duration/TSS."
+    - "Represent ambiguous sessions with primary_goal plus secondary_goals."
+    - "work_zone means the main physiological work zone, not the dominant zone by total workout time."
+
+  recommended_format: |
+    TITLE: [normalized workout title]
+
+    SUMMARY: [1-3 sentences in natural language. Explain the physiological goal,
+    the main stimulus, the work zone, the structure, the fatigue context, and the load level.]
+
+    RELATED_CONCEPTS: [comma-separated domain concepts and synonyms]
+
+    SEMANTIC_LABELS:
+    primary_goal=[primary_goal]
+    secondary_goals=[comma-separated secondary_goals]
+    work_zone=[work_zone]
+    structure_type=[structure_type]
+    fatigue_suitability=[fatigue_suitability]
+    load_level=[load_level]
+    duration_class=[duration_class]
+
+  avoid:
+    - "Do not make exact duration or exact TSS central to the embedding."
+    - "Do not include athlete-specific values such as FTP, TSB, CTL, ATL, or weekly volume in template embeddings."
+    - "Do not use automatically extracted dominant zone as work_zone without checking the actual training stimulus."
+    - "Do not label activation, torque, sprint, or FRC sessions as recovery just because parts of the workout are low intensity."
+
+librarian_query_generation_contract:
+  purpose: >
+    The Librarian should transform the user's natural language request and athlete context
+    into a semantic query that mirrors the embedding_text structure, then embed that query.
+
+  recommended_query_format: |
+    REQUEST: [short normalized version of the user request]
+
+    SUMMARY: [1-2 sentences describing the desired cycling session using the same vocabulary
+    as workout embedding_text. Mention physiological goal, structure, work zone, fatigue context,
+    and approximate load/duration class when available.]
+
+    RELATED_CONCEPTS: [comma-separated query concepts and synonyms]
+
+    SEMANTIC_LABELS:
+    primary_goal=[predicted primary_goal or unknown]
+    secondary_goals=[predicted secondary_goals or empty]
+    work_zone=[predicted work_zone or unknown]
+    structure_type=[predicted structure_type or unknown]
+    fatigue_suitability=[fatigue context converted from TSB or user request]
+    load_level=[target categorical load if known]
+    duration_class=[target duration class if known]
+
+  notes:
+    - "If the user asks for threshold/FTP, usually primary_goal=threshold and work_zone=Z4."
+    - "If the user asks for endurance/fondo/base, usually primary_goal=endurance and work_zone=Z2."
+    - "If the user asks for recovery/soltar piernas, usually primary_goal=recovery and work_zone=Z1."
+    - "If the user asks for VO2max, usually primary_goal=vo2max and work_zone=Z5."
+    - "If the user asks for FRC, attacks, punch, or repeated anaerobic efforts, usually primary_goal=anaerobic_frc and work_zone=Z6_Z7."
+    - "If the user asks for sprints, explosiveness, or peak power, usually primary_goal=neuromuscular_sprint and work_zone=Z6_Z7."
+    - "If the user asks for torque, low cadence strength, or force work, usually primary_goal=strength_torque and structure_type=torque_sprints."
+    - "If TSB indicates high fatigue, add fatigue_suitability=very_fatigued_ok or fatigued_ok and prefer recovery/endurance templates."
+    - "Do not include raw FTP, raw TSB, CTL, ATL, or weekly volume in the embedding query unless represented as semantic categories."
+
+rag_pipeline:
+  phase_1_sql_filter:
+    description: "Hard filtering before vector search."
+    recommended_filters:
+      - "sport_type = 'cycling'"
+      - "embedding_status = 'ready'"
+      - "duration_min around target duration, e.g. ±40%, expanded to ±60% if too few candidates"
+    notes: >
+      Duration is better handled here than in the embedding. SQL should reduce the
+      candidate set without removing too many relevant templates.
+
+  phase_2_vector_search:
+    description: "Semantic retrieval using cosine similarity over embedding_text embeddings."
+    embedding_model: "text-embedding-3-large"
+    min_similarity: 0.45
+    max_results: 20
+    notes: >
+      Vector search should capture training intent, physiological goal, structure,
+      work zone, and semantic similarity. It should not be responsible for exact
+      numeric matching.
+
+  phase_3_reranking:
+    description: "Rerank vector results using similarity and training load proximity."
+    current_formula: "score = 0.7 * cosine_similarity + 0.3 * tss_proximity"
+    min_similarity_rerank: 0.55
+    notes: >
+      Reranking can keep using est_tss and target TSS. In future versions, consider
+      adding metadata-aware terms such as primary_goal match, work_zone match,
+      structure_type match, fatigue suitability, and duration proximity.
+
+examples:
+  threshold_example:
+    title: "TH-04 | 3x12 Cruise FTP"
+    primary_goal: "threshold"
+    secondary_goals:
+      - "ftp"
+      - "tte"
+      - "pacing"
+      - "lactate_tolerance"
+    work_zone: "Z4"
+    structure_type: "long_intervals"
+    fatigue_suitability: "fresh_or_normal"
+    load_level: "high"
+    duration_class: "medium"
+    embedding_text: |
+      TITLE: TH-04 | 3x12 Cruise FTP
+
+      SUMMARY: Sesión de ciclismo orientada a mejorar el umbral funcional de potencia y acumular tiempo efectivo cerca de FTP. El estímulo principal consiste en intervalos largos y controlados a intensidad threshold, con foco en pacing, tolerancia al esfuerzo sostenido y mejora del tiempo hasta el agotamiento. Es una sesión exigente, adecuada para un atleta fresco o con fatiga normal, no para días de recuperación.
+
+      RELATED_CONCEPTS: FTP, threshold, cruise intervals, TTE, pacing, contrarreloj, lactate tolerance, sustained power
+
+      SEMANTIC_LABELS:
+      primary_goal=threshold
+      secondary_goals=ftp,tte,pacing,lactate_tolerance
+      work_zone=Z4
+      structure_type=long_intervals
+      fatigue_suitability=fresh_or_normal
+      load_level=high
+      duration_class=medium
+
+  recovery_example:
+    title: "RC-01 | Soltar piernas 30min"
+    primary_goal: "recovery"
+    secondary_goals:
+      - "flush"
+      - "mobility"
+      - "post_intense"
+    work_zone: "Z1"
+    structure_type: "steady"
+    fatigue_suitability: "very_fatigued_ok"
+    load_level: "very_low"
+    duration_class: "very_short"
+    embedding_text: |
+      TITLE: RC-01 | Soltar piernas 30min
+
+      SUMMARY: Sesión de ciclismo orientada a recuperación activa muy suave. El estímulo principal consiste en rodar de forma fácil en zona regenerativa para favorecer circulación, movilidad y sensación de soltura sin añadir carga significativa. Es adecuada para atletas muy fatigados o para el día posterior a una sesión intensa.
+
+      RELATED_CONCEPTS: recovery, active recovery, easy spin, flush, Z1, regenerativo, descarga, post-intenso, movilidad
+
+      SEMANTIC_LABELS:
+      primary_goal=recovery
+      secondary_goals=flush,mobility,post_intense
+      work_zone=Z1
+      structure_type=steady
+      fatigue_suitability=very_fatigued_ok
+      load_level=very_low
+      duration_class=very_short
+
+  mixed_endurance_frc_example:
+    title: "EB-MIX | Fondo con recordatorios FRC-FTP"
+    primary_goal: "endurance"
+    secondary_goals:
+      - "frc"
+      - "ftp"
+      - "sprints"
+      - "durability"
+      - "race_specificity"
+    work_zone: "mixed"
+    structure_type: "mixed"
+    fatigue_suitability: "fresh_only"
+    load_level: "very_high"
+    duration_class: "very_long"
+    embedding_text: |
+      TITLE: EB-MIX | Fondo con recordatorios FRC-FTP
+
+      SUMMARY: Sesión de ciclismo orientada principalmente a resistencia de larga duración, con estímulos puntuales de alta intensidad para recordar FRC, FTP y capacidad de cambio de ritmo. El trabajo base se realiza en fondo aeróbico, pero incluye bloques breves de sprints y esfuerzos intensos, por lo que es una sesión mixta y muy exigente. Es adecuada solo para atletas frescos y con alta tolerancia al volumen.
+
+      RELATED_CONCEPTS: endurance, long ride, durability, fondo, FRC, FTP, sprints, race specificity, high intensity reminders, aerobic base
+
+      SEMANTIC_LABELS:
+      primary_goal=endurance
+      secondary_goals=frc,ftp,sprints,durability,race_specificity
+      work_zone=mixed
+      structure_type=mixed
+      fatigue_suitability=fresh_only
+      load_level=very_high
+      duration_class=very_long
+
+sql_update_template:
+  description: "Template for updating one manually reviewed workout row."
+  sql: |
+    UPDATE workout_library
+    SET
+      title = '<normalized title>',
+      description = '<clean human-readable description>',
+      intensity_level = '<recovery|easy|moderate|hard|very_hard>',
+      tags = ARRAY['tag1', 'tag2', 'tag3'],
+      primary_goal = '<primary_goal>',
+      secondary_goals = ARRAY['goal1', 'goal2'],
+      work_zone = '<work_zone>',
+      structure_type = '<structure_type>',
+      fatigue_suitability = '<fatigue_suitability>',
+      load_level = '<load_level>',
+      duration_class = '<duration_class>',
+      embedding_text = '<canonical embedding text>',
+      embedding = NULL,
+      embedding_status = 'pending',
+      metadata_status = 'reviewed',
+      updated_at = NOW()
+    WHERE id = '<template_id>';
+
+evaluation_notes:
+  purpose: >
+    After metadata cleanup and embedding regeneration, evaluate the three actual
+    RAG phases separately: SQL filter, cosine similarity, and reranking.
+
+  recommended_metrics:
+    sql_phase:
+      - "SQL Recall for relevant templates"
+      - "Candidate Reduction"
+      - "Relevant Loss by SQL"
+    vector_phase:
+      - "Vector Recall@20"
+      - "Vector Hit@20"
+      - "Similarity distribution of relevant vs non-relevant templates"
+    reranking_phase:
+      - "Hit@3"
+      - "Precision@3"
+      - "nDCG@3"
+      - "Rerank Delta compared with vector-only ordering"

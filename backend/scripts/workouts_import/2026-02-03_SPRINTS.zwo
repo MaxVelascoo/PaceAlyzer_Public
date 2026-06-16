@@ -1,0 +1,28 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>SPRINTS</name>
+	<description>Meter 3 sprints de 10 segundos cada hora durante la ruta (6 en total) , resto rodar Z2
+__________________________________________
+
+OBJETIVO: Mejorar la explosividad y la velocidad mediante sprints, simulando esfuerzos cortos y máximos. Este entrenamiento se centra en aumentar la capacidad de aceleración.
+__________________________________________
+
+EJECUCIÓN: La potencia que te marca TP para las series no es la real, haz las series a la máxima potencia que puedas.
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1200" PowerHigh="0.7" PowerLow="0.5">
+		</Warmup>
+		<IntervalsT Repeat="6" OnDuration="10" OnPower="2.5" OffDuration="900" OffPower="0.6">
+		</IntervalsT>
+		<Cooldown Duration="540" PowerHigh="0.5" PowerLow="0.7">
+		</Cooldown>
+	</workout>
+</workout_file>

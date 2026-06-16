@@ -1,0 +1,462 @@
+---
+# Experimento C: evaluación end-to-end del sistema multiagente.
+#
+# Cada caso ejecuta una o varias queries reales y valida:
+# - que la petición no falle;
+# - que la acción final sea coherente;
+# - que se persista el efecto esperado en planned_workouts;
+# - que la ruta multiagente y las métricas se puedan recoger cuando se usa modo local.
+#
+# Además, cada caso siembra un contexto fisiológico controlado para evaluar el
+# sistema bajo escenarios reproducibles: normal, fresco, fatigado y muy fatigado.
+
+contexts:
+  normal: &normal_context
+    scenario: "normal"
+    profile:
+      ftp: 280
+      weight: 72.0
+      max_heartrate: 188
+      birthdate: "1999-04-15"
+      goal: "mejorar FTP y resistencia aeróbica"
+      available_days: 5
+    load:
+      ctl: 62
+      atl: 60
+      tsb: 2
+    weekly_summary:
+      completed_distance_km: 235
+      completed_hours: 9.5
+      completed_tss: 520
+    wellness:
+      hrv_baseline: 72
+      hrv_today: 73
+      resting_hr_baseline: 48
+      resting_hr_today: 48
+    target_duration_min: 75
+    target_tss: 65
+
+  fresh: &fresh_context
+    scenario: "fresh"
+    profile:
+      ftp: 292
+      weight: 71.5
+      max_heartrate: 190
+      birthdate: "1999-04-15"
+      goal: "mejorar VO2max y rendimiento en esfuerzos intensos"
+      available_days: 5
+    load:
+      ctl: 68
+      atl: 52
+      tsb: 16
+    weekly_summary:
+      completed_distance_km: 205
+      completed_hours: 7.8
+      completed_tss: 405
+    wellness:
+      hrv_baseline: 72
+      hrv_today: 78
+      resting_hr_baseline: 48
+      resting_hr_today: 45
+    target_duration_min: 65
+    target_tss: 75
+
+  fatigued: &fatigued_context
+    scenario: "fatigued"
+    profile:
+      ftp: 276
+      weight: 73.0
+      max_heartrate: 187
+      birthdate: "1999-04-15"
+      goal: "mantener consistencia sin acumular fatiga excesiva"
+      available_days: 4
+    load:
+      ctl: 70
+      atl: 83
+      tsb: -13
+    weekly_summary:
+      completed_distance_km: 310
+      completed_hours: 12.4
+      completed_tss: 690
+    wellness:
+      hrv_baseline: 72
+      hrv_today: 66
+      resting_hr_baseline: 48
+      resting_hr_today: 51
+    target_duration_min: 60
+    target_tss: 45
+
+  very_fatigued: &very_fatigued_context
+    scenario: "very_fatigued"
+    profile:
+      ftp: 276
+      weight: 73.0
+      max_heartrate: 187
+      birthdate: "1999-04-15"
+      goal: "recuperar y volver progresivamente a la carga"
+      available_days: 4
+    load:
+      ctl: 74
+      atl: 102
+      tsb: -28
+    weekly_summary:
+      completed_distance_km: 365
+      completed_hours: 14.2
+      completed_tss: 840
+    wellness:
+      hrv_baseline: 72
+      hrv_today: 62
+      resting_hr_baseline: 48
+      resting_hr_today: 54
+    target_duration_min: 45
+    target_tss: 25
+
+cases:
+  - id: E2E001
+    category: explainer_only
+    date: "2026-07-06"
+    setup_context: *normal_context
+    messages:
+      - "Qué significa sweet spot en ciclismo?"
+    expected:
+      action_in: ["none"]
+      min_reply_chars: 120
+      no_workout_dates: ["2026-07-06"]
+      expected_route_contains: ["operator", "explainer"]
+
+  - id: E2E002
+    category: direct_workout_creation
+    date: "2026-07-07"
+    setup_context: *fatigued_context
+    messages:
+      - "Ponme 40 minutos de Z2 para el 2026-07-07."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-07-07"
+      workout_exists: true
+      duration_min_between: [30, 55]
+      title_or_description_contains_any: ["Z2", "zona 2", "base", "suave"]
+      expected_route_contains: ["operator", "workout_editor", "explainer"]
+
+  - id: E2E003
+    category: rag_workout_creation
+    date: "2026-07-08"
+    setup_context: *normal_context
+    messages:
+      - "Ponme un entreno de umbral para el 2026-07-08."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-07-08"
+      workout_exists: true
+      duration_min_between: [45, 120]
+      title_or_description_contains_any: ["umbral", "threshold", "FTP", "Z4"]
+      expected_route_contains: ["operator", "librarian", "workout_editor", "explainer"]
+      rag_called: true
+
+  - id: E2E004
+    category: rag_workout_with_nutrition
+    date: "2026-07-09"
+    setup_context: *fresh_context
+    messages:
+      - "Quiero un entreno de VO2max para el 2026-07-09 con la nutrición incluida."
+    expected:
+      action_in: ["workout_modified", "nutrition_modified"]
+      workout_date: "2026-07-09"
+      workout_exists: true
+      nutrition_present: true
+      title_or_description_contains_any: ["VO2", "VO2max", "Z5", "aeróbica"]
+      expected_route_contains: ["operator", "librarian", "workout_editor", "nutrition_editor", "explainer"]
+      rag_called: true
+
+  - id: E2E005
+    category: direct_workout_with_nutrition
+    date: "2026-07-10"
+    setup_context: *normal_context
+    messages:
+      - "Ponme 90 minutos de fondo para el 2026-07-10 y añádeme la nutrición."
+    expected:
+      action_in: ["workout_modified", "nutrition_modified"]
+      workout_date: "2026-07-10"
+      workout_exists: true
+      duration_min_between: [75, 110]
+      nutrition_present: true
+      expected_route_contains: ["operator", "workout_editor", "nutrition_editor", "explainer"]
+
+  - id: E2E006
+    category: workout_modification
+    date: "2026-07-11"
+    setup_context: *normal_context
+    setup_workouts:
+      - date: "2026-07-11"
+        title: "Rodaje endurance inicial"
+        duration_min: 60
+        zone: "Z2"
+        status: "planned"
+    messages:
+      - "Alárgame el entreno del 2026-07-11 unos 20 minutos."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-07-11"
+      workout_exists: true
+      duration_min_between: [70, 95]
+      expected_route_contains: ["operator", "workout_editor", "explainer"]
+
+  - id: E2E007
+    category: workout_to_rest
+    date: "2026-07-12"
+    setup_context: *very_fatigued_context
+    setup_workouts:
+      - date: "2026-07-12"
+        title: "Series intensas planificadas"
+        duration_min: 75
+        zone: "Z4"
+        status: "planned"
+    messages:
+      - "Cambia el entreno del 2026-07-12 por descanso porque no me encuentro bien."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-07-12"
+      workout_exists: true
+      status_in: ["modified", "skipped", "planned"]
+      title_or_description_contains_any: ["descanso", "recuper", "suave", "rest"]
+      expected_route_contains: ["operator", "workout_editor", "explainer"]
+
+  - id: E2E008
+    category: nutrition_only_existing_workout
+    date: "2026-07-13"
+    setup_context: *normal_context
+    setup_workouts:
+      - date: "2026-07-13"
+        title: "Fondo largo sin nutrición"
+        duration_min: 120
+        zone: "Z2"
+        status: "planned"
+    messages:
+      - "Añádeme la nutrición del entreno del 2026-07-13."
+    expected:
+      action_in: ["nutrition_modified"]
+      workout_date: "2026-07-13"
+      workout_exists: true
+      nutrition_present: true
+      expected_route_contains: ["operator", "nutrition_editor", "explainer"]
+
+  - id: E2E009
+    category: week_planning
+    date: "2026-07-14"
+    setup_context:
+      <<: *fresh_context
+      profile:
+        ftp: 286
+        weight: 72.0
+        max_heartrate: 188
+        birthdate: "1999-04-15"
+        goal: "construir base aeróbica para gran fondo"
+        available_days: 5
+      target_duration_min: 90
+      target_tss: 60
+    messages:
+      - "Planifícame la semana del 2026-07-14 al 2026-07-20 con foco en base aeróbica."
+    expected:
+      action_in: ["week_plan_created"]
+      week_range: ["2026-07-14", "2026-07-20"]
+      min_workouts_in_range: 3
+      expected_route_contains: ["operator", "week_planner", "explainer"]
+
+  - id: E2E010
+    category: contextual_followup
+    date: "2026-07-21"
+    setup_context: *normal_context
+    messages:
+      - "Ponme 75 minutos de tempo para el 2026-07-21."
+      - "Añádele también la nutrición."
+    expected:
+      action_in: ["nutrition_modified"]
+      workout_date: "2026-07-21"
+      workout_exists: true
+      nutrition_present: true
+      expected_route_contains: ["operator", "nutrition_editor", "explainer"]
+      sequence_length: 2
+
+  - id: E2E011
+    category: rag_recovery
+    date: "2026-07-22"
+    setup_context: *very_fatigued_context
+    messages:
+      - "Ponme algo de recuperación activa para el 2026-07-22."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-07-22"
+      workout_exists: true
+      duration_min_between: [20, 75]
+      title_or_description_contains_any: ["recuper", "Z1", "suave", "active recovery"]
+      expected_route_contains: ["operator", "librarian", "workout_editor", "explainer"]
+      rag_called: true
+
+  - id: E2E012
+    category: unavailable_nutrition
+    date: "2026-07-23"
+    setup_context: *normal_context
+    messages:
+      - "Añádeme nutrición al entreno del 2026-07-23."
+    expected:
+      action_in: ["none", "nutrition_modified"]
+      workout_date: "2026-07-23"
+      workout_exists: false
+      nutrition_present: false
+      min_reply_chars: 60
+      expected_route_contains: ["operator", "nutrition_editor", "explainer"]
+
+  - id: E2E013
+    category: workout_cancel
+    date: "2026-07-24"
+    setup_context: *very_fatigued_context
+    setup_workouts:
+      - date: "2026-07-24"
+        title: "VO2max planificado"
+        duration_min: 70
+        zone: "Z5"
+        status: "planned"
+    messages:
+      - "Cancela el entreno del 2026-07-24, hoy necesito descansar."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-07-24"
+      workout_exists: true
+      status_in: ["modified", "skipped"]
+      title_or_description_contains_any: ["descanso", "cancel", "salt", "skipped", "recuper"]
+      expected_route_contains: ["operator", "workout_editor", "explainer"]
+
+  - id: E2E014
+    category: very_fatigued_short_recovery
+    date: "2026-07-25"
+    setup_context: *very_fatigued_context
+    messages:
+      - "Estoy muy cargado, ponme 30 minutos de recuperación activa para el 2026-07-25."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-07-25"
+      workout_exists: true
+      duration_min_between: [20, 45]
+      title_or_description_contains_any: ["recuper", "Z1", "suave", "soltar"]
+      expected_route_contains: ["operator", "workout_editor", "explainer"]
+
+  - id: E2E015
+    category: fatigued_hard_request
+    date: "2026-07-26"
+    setup_context: *fatigued_context
+    messages:
+      - "Aunque estoy cansado, ponme algo de VO2max para el 2026-07-26."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-07-26"
+      workout_exists: true
+      duration_min_between: [30, 90]
+      expected_route_contains: ["operator", "librarian", "workout_editor", "explainer"]
+      rag_called: true
+
+  - id: E2E016
+    category: fresh_hard_open
+    date: "2026-07-27"
+    setup_context: *fresh_context
+    messages:
+      - "Me noto fresco, ponme una sesión dura de VO2max para el 2026-07-27."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-07-27"
+      workout_exists: true
+      duration_min_between: [45, 140]
+      title_or_description_contains_any: ["VO2", "Z5", "aeróbica", "microinterval"]
+      expected_route_contains: ["operator", "librarian", "workout_editor", "explainer"]
+      rag_called: true
+
+  - id: E2E017
+    category: very_fatigued_week_recovery
+    date: "2026-07-28"
+    setup_context: *very_fatigued_context
+    messages:
+      - "Planifícame una semana de recuperación del 2026-07-28 al 2026-08-03 porque estoy muy fatigado."
+    expected:
+      action_in: ["week_plan_created"]
+      week_range: ["2026-07-28", "2026-08-03"]
+      min_workouts_in_range: 2
+      expected_route_contains: ["operator", "week_planner", "explainer"]
+
+  - id: E2E018
+    category: fresh_week_load
+    date: "2026-08-04"
+    setup_context: *fresh_context
+    messages:
+      - "Planifícame una semana de carga del 2026-08-04 al 2026-08-10 con un día de VO2max y otro de sweet spot."
+    expected:
+      action_in: ["week_plan_created"]
+      week_range: ["2026-08-04", "2026-08-10"]
+      min_workouts_in_range: 3
+      expected_route_contains: ["operator", "week_planner", "explainer"]
+
+  - id: E2E019
+    category: workout_make_easier
+    date: "2026-08-11"
+    setup_context: *fatigued_context
+    setup_workouts:
+      - date: "2026-08-11"
+        title: "Threshold exigente"
+        duration_min: 80
+        zone: "Z4"
+        status: "planned"
+    messages:
+      - "Haz más suave el entreno del 2026-08-11, no me veo para apretar."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-08-11"
+      workout_exists: true
+      title_or_description_contains_any: ["suave", "Z2", "recuper", "reduc", "fácil"]
+      expected_route_contains: ["operator", "workout_editor", "explainer"]
+
+  - id: E2E020
+    category: contextual_shorten_followup
+    date: "2026-08-12"
+    setup_context: *normal_context
+    messages:
+      - "Ponme 90 minutos de fondo para el 2026-08-12."
+      - "Mejor déjalo más corto, unos 60 minutos."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-08-12"
+      workout_exists: true
+      duration_min_between: [50, 75]
+      expected_route_contains: ["operator", "workout_editor", "explainer"]
+      sequence_length: 2
+
+  - id: E2E021
+    category: nutrition_long_existing_workout
+    date: "2026-08-13"
+    setup_context: *normal_context
+    setup_workouts:
+      - date: "2026-08-13"
+        title: "Fondo largo Z2"
+        duration_min: 150
+        zone: "Z2"
+        status: "planned"
+    messages:
+      - "Prepara la nutrición del fondo largo del 2026-08-13."
+    expected:
+      action_in: ["nutrition_modified"]
+      workout_date: "2026-08-13"
+      workout_exists: true
+      nutrition_present: true
+      expected_route_contains: ["operator", "nutrition_editor", "explainer"]
+
+  - id: E2E022
+    category: very_fatigued_conflicting_hard_request
+    date: "2026-08-14"
+    setup_context: *very_fatigued_context
+    messages:
+      - "Estoy reventado pero ponme series duras para el 2026-08-14."
+    expected:
+      action_in: ["workout_modified"]
+      workout_date: "2026-08-14"
+      workout_exists: true
+      duration_min_between: [20, 75]
+      title_or_description_contains_any: ["recuper", "suave", "Z1", "Z2", "fatiga", "reduc"]
+      expected_route_contains: ["operator", "librarian", "workout_editor", "explainer"]
+      rag_called: true

@@ -1,0 +1,84 @@
+.page {
+  min-height: 100vh;
+  background: #f4f4f4;
+  padding: 48px 0 80px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.back {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.45);
+  text-decoration: none;
+  margin-bottom: 32px;
+  transition: color 0.15s;
+}
+
+.back:hover { color: rgba(15,15,20,0.75); }
+
+.title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f0f14;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.updated {
+  font-size: 0.82rem;
+  color: rgba(15,15,20,0.4);
+  margin: 0 0 28px;
+}
+
+.lead {
+  font-size: 1rem;
+  color: rgba(15,15,20,0.7);
+  line-height: 1.65;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(15,15,20,0.08);
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
+.section p {
+  font-size: 0.92rem;
+  color: rgba(15,15,20,0.65);
+  line-height: 1.7;
+  margin: 8px 0 0;
+}
+
+.h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f0f14;
+  margin: 0 0 6px;
+}
+
+.list {
+  margin: 8px 0 12px 20px;
+  padding: 0;
+}
+
+.list li {
+  font-size: 0.92rem;
+  color: rgba(15,15,20,0.65);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+.link {
+  color: #6366f1;
+  text-decoration: none;
+}
+
+.link:hover { text-decoration: underline; }

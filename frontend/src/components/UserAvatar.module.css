@@ -1,0 +1,37 @@
+.wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(15, 15, 20, 0.08);
+  box-shadow: 0 8px 20px rgba(15, 15, 20, 0.12);
+}
+
+.fallback {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0f0f14, #2a2a35);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 8px 20px rgba(15, 15, 20, 0.12);
+}
+
+.ring {
+  position: absolute;
+  inset: -8px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(252, 76, 2, 0.12));
+  z-index: 0;
+  filter: blur(2px);
+}

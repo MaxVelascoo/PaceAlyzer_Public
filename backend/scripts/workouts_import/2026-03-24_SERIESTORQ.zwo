@@ -1,0 +1,32 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>SERIES TORQUE RECORDATORIO (SENTADO)</name>
+	<description>OBJETIVO: Mejorar la fuerza muscular y la eficiencia del pedaleo. Al fortalecer las conexiones neuromusculares y activar fibras musculares de tipo II, los ciclistas mejoran su rendimiento en sprints y subidas​
+__________________________________________
+
+EJECUCIÓN: Buscar una pendiente lo más constante posible. Mover el máximo desarrollo posible generando la máxima fuerza con una cadencia entre 40/55
+Percepción esfuerzo 6/7 sobre 10
+Parar se aparecen dolores articulares
+
+Mantener el mismo NM en todas. Archivo adjunto con instrucciones NM.
+__________________________________________
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1800" PowerHigh="0.65" PowerLow="0.45">
+		</Warmup>
+		<IntervalsT Repeat="2" OnDuration="180" OnPower="0.9" OffDuration="180" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.55">
+		</SteadyState>
+		<IntervalsT Repeat="2" OnDuration="300" OnPower="0.9" OffDuration="240" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="2400" Power="0.55">
+		</SteadyState>
+	</workout>
+</workout_file>

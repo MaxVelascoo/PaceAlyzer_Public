@@ -1,0 +1,35 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>CRISS CROSS EN LLANO 3 X 5</name>
+	<description>OBJETIVO: Mejorar la capacidad de resistencia al lactato y el FTP, optimiza la eliminación del lactato y el rendimiento en esfuerzos variables.
+__________________________________________
+
+EJECUCIÓN:
+20 segundos chispazo de pie
+1:40 sentado TEMPO
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="2700" PowerHigh="0.68" PowerLow="0.48">
+		</Warmup>
+		<IntervalsT Repeat="5" OnDuration="20" OnPower="1.65" OffDuration="100" OffPower="0.75">
+		</IntervalsT>
+		<SteadyState Duration="600" Power="0.53">
+		</SteadyState>
+		<IntervalsT Repeat="5" OnDuration="20" OnPower="1.65" OffDuration="100" OffPower="0.75">
+		</IntervalsT>
+		<SteadyState Duration="600" Power="0.53">
+		</SteadyState>
+		<IntervalsT Repeat="5" OnDuration="20" OnPower="1.65" OffDuration="100" OffPower="0.75">
+		</IntervalsT>
+		<Cooldown Duration="2700" PowerHigh="0.53" PowerLow="0.73">
+		</Cooldown>
+	</workout>
+</workout_file>

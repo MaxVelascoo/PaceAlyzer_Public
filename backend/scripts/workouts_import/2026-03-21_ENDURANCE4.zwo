@@ -1,0 +1,19 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>ENDURANCE 4:00</name>
+	<description>OBJETIVO: Mejorar la resistencia aeróbica.
+El entrenamiento consiste en rodar a intensidad moderada durante un periodo prolongado, manteniendo un esfuerzo constante sin llegar a la fatiga.
+____________________________________
+
+EJECUCION: Maximizar tiempo en Z2
+- Observar tiempo en zona (máximo en Z2)
+- Observar IV (lo más bajo posible: 1,0 - 1,10)
+
+El IV es la diferencia entre la potencia media y la NP. Este es un indicador de llevar un ritmo constante y dejando de pedalear el mínimo posible.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<SteadyState Duration="14400" Power="0.63">
+		</SteadyState>
+	</workout>
+</workout_file>

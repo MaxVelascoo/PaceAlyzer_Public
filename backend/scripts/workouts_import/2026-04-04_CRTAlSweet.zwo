@@ -1,0 +1,40 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>CRTA l Sweetspot + push</name>
+	<description>objetivos:
+- Aumento del gasto cardíaco.
+- Tolerancia al lactato en cantidades bajas (4mmol).
+- Tolerancia a la deuda de oxigeno.
+- Mejora de la eficiencia aeróbica.
+
+Instrucciones:
+Hacer los trabajos maracados en subida tendida (5-6%), el cambio de ritmo final de 30&apos;&apos; a tope. (RPE: 8-9/10)
+
+rodar suave al acabar (RPE: 2/10)</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="5400" PowerHigh="0.68" PowerLow="0.48">
+		</Warmup>
+		<SteadyState Duration="600" Power="0.92">
+		</SteadyState>
+		<SteadyState Duration="30" Power="1.45">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.48">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.92">
+		</SteadyState>
+		<SteadyState Duration="30" Power="1.45">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.48">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.92">
+		</SteadyState>
+		<SteadyState Duration="30" Power="1.45">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.48">
+		</SteadyState>
+		<Cooldown Duration="3600" PowerHigh="0.5" PowerLow="0.7">
+		</Cooldown>
+	</workout>
+</workout_file>

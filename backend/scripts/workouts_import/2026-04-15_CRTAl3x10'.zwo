@@ -1,0 +1,15 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>CRTA l 3 x10&apos; Sweetspot</name>
+	<description>Trabajo en subida, puerto tendido al 5-6% constante.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="3600" PowerHigh="0.73" PowerLow="0.53">
+		</Warmup>
+		<IntervalsT Repeat="3" OnDuration="600" OnPower="0.91" OffDuration="300" OffPower="0.45">
+		</IntervalsT>
+		<Cooldown Duration="3600" PowerHigh="0.51" PowerLow="0.71">
+		</Cooldown>
+	</workout>
+</workout_file>

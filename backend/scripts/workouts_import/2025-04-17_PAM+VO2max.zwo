@@ -1,0 +1,33 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>PAM + VO2max</name>
+	<description>OBJETIVO: Mejorar la capacidad anaeróbica y la potencia máxima a través de intervalos cortos en el entrenamiento Billat, optimizando la tolerancia al lactato y aumentando la eficiencia en el uso del oxígeno para un mejor rendimiento en esfuerzos intensos.
+__________________________________________
+
+EJECUCIÓN: Todos los bloques en subida.
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1800" PowerHigh="0.55" PowerLow="0.35">
+		</Warmup>
+		<IntervalsT Repeat="8" OnDuration="30" OnPower="1.35" OffDuration="60" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.55">
+		</SteadyState>
+		<IntervalsT Repeat="8" OnDuration="60" OnPower="1.2" OffDuration="60" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="1200" Power="0.55">
+		</SteadyState>
+		<IntervalsT Repeat="8" OnDuration="120" OnPower="1.1" OffDuration="120" OffPower="0.55">
+		</IntervalsT>
+		<Cooldown Duration="3000" PowerHigh="0.35" PowerLow="0.55">
+		</Cooldown>
+	</workout>
+</workout_file>

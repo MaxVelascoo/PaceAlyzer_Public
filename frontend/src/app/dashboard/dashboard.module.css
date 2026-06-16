@@ -1,0 +1,581 @@
+.page {
+  min-height: 100vh;
+  background: #f4f4f4;
+  padding: 32px 0 80px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f0f14;
+  margin: 0;
+}
+
+.section { display: flex; flex-direction: column; gap: 12px; }
+
+.sectionTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.6);
+  margin: 0;
+  text-transform: none;
+}
+
+/* Título unificado dentro de cada card */
+.cardTitle {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(15,15,20,0.38);
+  margin: 0 0 14px 0;
+}
+
+/* ── Estado actual ── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 12px;
+}
+
+/* Grid compartido para bloques 1 y 2 */
+.topSections {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.topRow {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 12px;
+}
+
+.statCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(15,15,20,0.07);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.statTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.statIcon { font-size: 22px; line-height: 1; margin-top: 2px; }
+
+.statValue {
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.statUnit {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: rgba(15,15,20,0.5);
+  margin-top: 2px;
+}
+
+.statSublabel {
+  font-size: 0.75rem;
+  color: rgba(15,15,20,0.45);
+  border-top: 1px solid rgba(15,15,20,0.06);
+  padding-top: 8px;
+}
+
+/* ── Progreso semanal ── */
+.weekGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 12px;
+}
+
+.weekSummaryCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(15,15,20,0.07);
+  padding: 20px 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.weekSummaryRow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+.weekStat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.weekStatIcon { font-size: 20px; margin-bottom: 4px; }
+
+.weekStatValue {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f0f14;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.weekStatUnit {
+  font-size: 1rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.5);
+  margin-left: 2px;
+}
+
+.weekStatLabel {
+  font-size: 0.75rem;
+  color: rgba(15,15,20,0.45);
+  margin-top: 4px;
+}
+
+.weekDivider {
+  width: 1px;
+  height: 50px;
+  background: rgba(15,15,20,0.08);
+  flex-shrink: 0;
+}
+
+.weekChartCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(15,15,20,0.07);
+  padding: 16px 16px 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.weekChartTitle {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.45);
+  margin-bottom: 4px;
+}
+
+/* ── Bottom grid ── */
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* ── Zonas ── */
+.zonesCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(15,15,20,0.07);
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.zonesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.zonesSubtitle {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.5);
+  margin: 0 0 10px;
+}
+
+.zoneRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.zoneLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.zoneTrack {
+  flex: 1;
+  height: 8px;
+  background: rgba(15,15,20,0.07);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.zoneFill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.zoneHours {
+  font-size: 0.75rem;
+  color: rgba(15,15,20,0.55);
+  width: 48px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Tendencia ── */
+.trendCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(15,15,20,0.07);
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trendCard:hover {
+  border-color: #4a90d9;
+  box-shadow: 0 4px 16px rgba(74,144,217,0.12);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* ── CTL/ATL/TSB card unificado ── */
+.ctlCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(15,15,20,0.07);
+  padding: 20px 24px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ctlRow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.ctlMetric {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.ctlValue {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.ctlKey {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.5);
+}
+
+.ctlHint {
+  font-size: 0.78rem;
+  color: rgba(15,15,20,0.45);
+}
+
+.ctlDivider {
+  width: 1px;
+  height: 52px;
+  background: rgba(15,15,20,0.08);
+  flex-shrink: 0;
+}
+
+.ctlDesc {
+  font-size: 0.82rem;
+  color: rgba(15,15,20,0.5);
+  text-align: center;
+  border-top: 1px solid rgba(15,15,20,0.06);
+  padding-top: 12px;
+}
+
+/* ── Athlete card (peso, VO2max, w/kg, HR, HRV) ── */
+.athleteCard {
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid rgba(15,15,20,0.07);
+  padding: 18px 20px 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  cursor: pointer;
+}
+
+.athleteCard:hover {
+  border-color: rgba(15,15,20,0.14);
+  box-shadow: 0 6px 20px rgba(15,15,20,0.08);
+  transform: translateY(-2px);
+}
+
+/* Contenedor del contenido (sin el título) — divide el espacio en dos mitades iguales */
+.athleteContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 120px;
+}
+
+.athleteRow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.athleteMetric {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.athleteValue {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.athleteUnit {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-left: 2px;
+  opacity: 0.75;
+}
+
+.athleteLabel {
+  font-size: 0.72rem;
+  color: rgba(15,15,20,0.45);
+}
+
+.athleteDivider {
+  width: 1px;
+  height: 44px;
+  background: rgba(15,15,20,0.08);
+  flex-shrink: 0;
+}
+
+.athleteRowBottom {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(15,15,20,0.06);
+  padding: 12px 0;
+}
+
+.athleteMetricSm {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.athleteValueSm {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.athleteUnitSm {
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-left: 2px;
+  opacity: 0.7;
+}
+
+.athleteLabelSm {
+  font-size: 0.7rem;
+  color: rgba(15,15,20,0.45);
+}
+
+.athleteDividerSm {
+  width: 1px;
+  height: 32px;
+  background: rgba(15,15,20,0.08);
+  flex-shrink: 0;
+}
+
+/* ── Dashboard header ── */
+.dashboardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dashboardHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.syncMsg {
+  font-size: 0.8rem;
+  color: rgba(15,15,20,0.5);
+}
+
+/* Strava sync button */
+.stravaSync {
+  padding: 10px 22px;
+  border-radius: 12px;
+  background: #6366f1;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: background 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.stravaSync:hover:not(:disabled) {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.stravaSync:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ctlValueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+/* ── Curva de potencia MMP ── */
+.mmpCard {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(15,15,20,0.07);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 20px 20px 12px;
+}
+
+.mmpInner {
+  /* contenedor del chart, sin padding extra */
+}
+
+/* ── Curva de potencia — header y controles ── */
+.mmpHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.mmpControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mmpSelect {
+  height: 32px;
+  padding: 0 10px;
+  border: 1px solid rgba(15,15,20,0.12);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #0f0f14;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.mmpSelect:focus {
+  border-color: #6366f1;
+}
+
+.mmpCustomRange {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mmpDateInput {
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid rgba(15,15,20,0.12);
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #0f0f14;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.mmpDateInput:focus {
+  border-color: #6366f1;
+}
+
+.mmpDateSep {
+  font-size: 12px;
+  color: rgba(15,15,20,0.4);
+  font-weight: 600;
+}
+
+.mmpLoading {
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(15,15,20,0.4);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

@@ -1,0 +1,33 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>Cap. Anaerobica Lact. 3 x (5 x 30&apos;&apos; Z5)</name>
+	<description>Objetivos:
+- Mejora de la tolerancia al lactato.
+- Aumento de las enzimas glucolíticas.
+- Máxima hiperacidez con gran acumulación de lactato.
+- Mejora de la capacidad de reserva funcional
+
+Instrucciones:
+calentar 45&apos; Z2
+en llano hacer: 3 x (5 x 30&apos;&apos; Z5B (a tope) + 3&apos; Z1) + 15&apos; Z2
+
+recuperador muscular al terminar.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="2700" PowerHigh="0.75" PowerLow="0.55">
+		</Warmup>
+		<IntervalsT Repeat="5" OnDuration="30" OnPower="1.7" OffDuration="180" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="900" Power="0.55">
+		</SteadyState>
+		<IntervalsT Repeat="5" OnDuration="30" OnPower="1.7" OffDuration="180" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="900" Power="0.55">
+		</SteadyState>
+		<IntervalsT Repeat="5" OnDuration="30" OnPower="1.7" OffDuration="180" OffPower="0.55">
+		</IntervalsT>
+		<Cooldown Duration="2700" PowerHigh="0.55" PowerLow="0.75">
+		</Cooldown>
+	</workout>
+</workout_file>

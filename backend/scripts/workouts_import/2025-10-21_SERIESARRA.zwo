@@ -1,0 +1,35 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>SERIES ARRANCADAS TORQUE 60&quot; (SENTADO) Tiz 9&apos;</name>
+	<description>OBJETIVO: Mejorar la fuerza muscular y la eficiencia del pedaleo. Al fortalecer las conexiones neuromusculares y activar fibras musculares de tipo II, los ciclistas mejoran su rendimiento en sprints y subidas​
+__________________________________________
+
+EJECUCIÓN: Arrancar desde CASI PARADO con el máximo desarrollo, una vez coges cadencia paras. SENTADO
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<SteadyState Duration="1200" Power="0.6">
+		</SteadyState>
+		<IntervalsT Repeat="3" OnDuration="60" OnPower="1.55" OffDuration="180" OffPower="0.6">
+		</IntervalsT>
+		<SteadyState Duration="900" Power="0.6">
+		</SteadyState>
+		<IntervalsT Repeat="3" OnDuration="60" OnPower="1.55" OffDuration="180" OffPower="0.6">
+		</IntervalsT>
+		<SteadyState Duration="900" Power="0.6">
+		</SteadyState>
+		<IntervalsT Repeat="3" OnDuration="60" OnPower="1.55" OffDuration="180" OffPower="0.6">
+		</IntervalsT>
+		<SteadyState Duration="900" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="1200" Power="0.6">
+		</SteadyState>
+	</workout>
+</workout_file>

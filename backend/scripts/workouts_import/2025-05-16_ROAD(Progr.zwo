@@ -1,0 +1,37 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>ROAD (Progresivas Z4 a Máx) 1.3</name>
+	<description>OBJETIVO: Mejorar la capacidad anaeróbica y la tolerancia al lactato, lo que permite al ciclista mantener esfuerzos altos durante períodos más cortos, optimizando el rendimiento en situaciones exigentes​
+__________________________________________
+
+EJECUCIÓN: Buscar el máximo rendimiento en cada serie a través de progresiones de intensidad en SUBIDA.
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<SteadyState Duration="1200" Power="0.7">
+		</SteadyState>
+		<IntervalsT Repeat="1" OnDuration="900" OnPower="1" OffDuration="900" OffPower="0.56">
+		</IntervalsT>
+		<IntervalsT Repeat="2" OnDuration="600" OnPower="1.05" OffDuration="600" OffPower="0.56">
+		</IntervalsT>
+		<IntervalsT Repeat="3" OnDuration="300" OnPower="1.1" OffDuration="300" OffPower="0.56" Cadence="85" CadenceResting="65" >
+			<textevent timeoffset="0" message=""/>
+			<textevent timeoffset="300" message=""/>
+			<textevent timeoffset="600" message=""/>
+			<textevent timeoffset="900" message=""/>
+			<textevent timeoffset="1200" message=""/>
+			<textevent timeoffset="1500" message=""/>
+		</IntervalsT>
+		<IntervalsT Repeat="4" OnDuration="120" OnPower="1.15" OffDuration="300" OffPower="0.56">
+		</IntervalsT>
+		<SteadyState Duration="1320" Power="0.56">
+		</SteadyState>
+	</workout>
+</workout_file>

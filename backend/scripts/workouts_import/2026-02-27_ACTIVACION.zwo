@@ -1,0 +1,36 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>ACTIVACION (ESCALERA)</name>
+	<description>OBJETIVO: Preparar el cuerpo para la competición.
+
+El entrenamiento de activación pre-carrera consiste en realizar esfuerzos cortos y explosivos a intensidad moderada-alta, combinados con periodos de recuperación. Esto ayuda a activar los músculos, mejorar la coordinación y aumentar el flujo sanguíneo, sin generar fatiga.
+______________________________________
+
+EJECUCION: Escalera 4 escalones progresivos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<SteadyState Duration="2700" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="60" Power="0.75">
+		</SteadyState>
+		<SteadyState Duration="60" Power="0.85">
+		</SteadyState>
+		<SteadyState Duration="60" Power="0.95">
+		</SteadyState>
+		<SteadyState Duration="60" Power="1.05">
+		</SteadyState>
+		<SteadyState Duration="600" Power="0.6">
+		</SteadyState>
+		<SteadyState Duration="60" Power="0.75">
+		</SteadyState>
+		<SteadyState Duration="60" Power="0.85">
+		</SteadyState>
+		<SteadyState Duration="60" Power="0.95">
+		</SteadyState>
+		<SteadyState Duration="60" Power="1.05">
+		</SteadyState>
+		<SteadyState Duration="1800" Power="0.6">
+		</SteadyState>
+	</workout>
+</workout_file>

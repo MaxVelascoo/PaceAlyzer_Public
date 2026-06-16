@@ -1,0 +1,13 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>1:30 RECUPERACIÓN ACTIVA</name>
+	<description>OBJETIVO: Rodaje suave con el objetivo de recuperar.
+
+Trabajar en Z1 - 2</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<SteadyState Duration="5400" Power="0.5">
+		</SteadyState>
+	</workout>
+</workout_file>

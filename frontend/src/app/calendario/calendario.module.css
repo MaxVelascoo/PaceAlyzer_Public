@@ -1,0 +1,1904 @@
+.calendario {
+  padding-top: 32px;
+  padding-bottom: 120px;
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+/* Mes */
+.mes {
+  text-align: center;
+  margin: 10px 0 30px 0;
+  font-size: 1.3rem;
+  color: #a0a0a0;
+}
+
+/* Contenido del día */
+.contenidoDia {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Dos tarjetas */
+.twoCardsLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin: 32px 0 80px;
+}
+
+/* Bloque título + tarjeta */
+.cardBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Títulos centrados, mismo formato que el mes */
+.cardHeading {
+  font-size: 1.3rem;
+  color: #000000;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Tarjetas más altas */
+.cardShell {
+  width: 100%;
+  min-height: 600px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid #ececf3;
+  box-shadow: 0 14px 32px rgba(32, 18, 58, 0.06);
+  position: relative;
+  overflow: visible;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+/* Tarjeta de nutrición sin min-height */
+.cardShell.fullWidth {
+  min-height: auto;
+}
+
+.cardShell:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 42px rgba(32, 18, 58, 0.12);
+  border-color: #dcdff5;
+}
+
+/* Gradientes de marca */
+.planned::before,
+.done::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+  transition: opacity 160ms ease;
+}
+.planned::before {
+  background: radial-gradient(60% 60% at 0% 0%,
+    rgba(106, 17, 203, 0.10) 0%,
+    rgba(106, 17, 203, 0) 60%);
+}
+.done::before {
+  background: radial-gradient(60% 60% at 100% 0%,
+    rgba(255, 106, 0, 0.12) 0%,
+    rgba(255, 106, 0, 0) 60%);
+}
+.cardShell:hover::before { opacity: 1; }
+
+/* =========================
+   DONE WORKOUT (nuevo diseño)
+   ========================= */
+
+.doneNew{
+  height: 100%;
+  padding: 26px 26px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.doneNewHeader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.doneNewEmoji{
+  font-size: 22px;
+  line-height: 1;
+}
+
+.doneNewTitle{
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f0f14;
+  flex: 1;
+  line-height: 1.25;
+}
+
+.stravaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.stravaButton:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+.stravaButtonImg {
+  height: 32px;
+  width: auto;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Stats */
+.statsGrid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.statCard{
+  border-radius: 14px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 10px 18px rgba(15,15,20,0.06);
+  border: 1px solid rgba(15,15,20,0.06);
+}
+
+.statTop{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.statIcon{
+  font-size: 18px;
+  line-height: 1;
+}
+
+.statValue{
+  font-size: 15px;
+  font-weight: 900;
+  color: #0f0f14;
+  letter-spacing: -0.01em;
+}
+
+.statLabel{
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(15,15,20,0.55);
+}
+
+/* Tonos (muy parecidos a tu mock) */
+.tone_violet{
+  background: rgba(168, 141, 255, 0.18);
+}
+
+.tone_orange{
+  background: rgba(255, 196, 143, 0.24);
+}
+
+.tone_pink{
+  background: rgba(255, 158, 178, 0.20);
+}
+
+.tone_yellow{
+  background: rgba(255, 215, 130, 0.22);
+}
+
+/* Chart cards (estructura lista para meter gráfica luego) */
+.chartCard{
+  background: rgba(255,255,255,0.65);
+  border: 1px solid rgba(15,15,20,0.06);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 12px 22px rgba(15,15,20,0.06);
+}
+
+.chartHeader{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.chartTitle{
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #0f0f14;
+}
+
+.chartMeta{
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(15,15,20,0.55);
+}
+
+.chartMeta strong{
+  color: #0f0f14;
+  font-weight: 900;
+}
+
+.chartPlaceholder{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chartContainer {
+  width: 100%;
+  height: 180px;
+  padding: 10px 0;
+}
+
+/* Tipografía de los números de las gráficas */
+.chartContainer text {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+}
+
+/* Tooltip de Recharts */
+.chartContainer :global(.recharts-tooltip-wrapper) {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.chartContainer :global(.recharts-tooltip-label),
+.chartContainer :global(.recharts-tooltip-item-value) {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+}
+
+.chartSkeleton{
+  height: 120px;
+  border-radius: 14px;
+  background: linear-gradient(
+    90deg,
+    rgba(15,15,20,0.05),
+    rgba(15,15,20,0.09),
+    rgba(15,15,20,0.05)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+
+@keyframes shimmer{
+  0%{ background-position: 0% 0; }
+  100%{ background-position: 200% 0; }
+}
+
+.chartHint{
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(15,15,20,0.50);
+  text-align: center;
+  padding: 20px;
+}
+/* Footer row */
+.doneFooterRow{
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(15,15,20,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerLabel{
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(15,15,20,0.55);
+}
+
+.footerValue{
+  font-size: 14px;
+  font-weight: 900;
+  color: #0f0f14;
+}
+
+/* Responsive por si se hace estrecho */
+@media (max-width: 1050px){
+  .statsGrid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* Estado vacío por si no hay entreno */
+.emptyState {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #8a8a95;
+  font-size: 1rem;
+}
+
+.chatButton {
+  padding: 14px 28px;
+  border-radius: 16px;
+  background: rgb(215, 97, 166);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+}
+
+.chatButton:hover {
+  background: rgba(197, 29, 126);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 5px rgb(169, 24, 108);
+}
+
+.weekHeaderRow {
+  display: grid;
+  grid-template-columns: 160px 1fr 160px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* WeekHeader usa clase global .week-header */
+.weekHeaderRow :global(.week-header) {
+  grid-column: 2;
+  justify-self: center;
+  width: 100%;
+}
+
+.weekHeaderRow .stravaSync {
+  grid-column: 3;
+  justify-self: start;
+  margin-left: 16px;
+}
+
+/* Strava sync button */
+.stravaSync {
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #6366f1;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: background 0.15s ease, transform 0.15s ease;
+  white-space: pre-line;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.stravaSync:hover:not(:disabled) {
+  background: #7476e9;
+  transform: translateY(-1px);
+}
+
+.stravaSync:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.syncError {
+  margin: 10px auto 0;
+  max-width: 900px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff0f0;
+  border: 1px solid #ffd2d2;
+  color: #8a2a2a;
+  font-size: 0.95rem;
+}
+
+/* =========================
+   Planned workout card (Syne + jerarquía consistente)
+   ========================= */
+
+.plannedInner{
+  min-height: 100%;
+  padding: 26px 26px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: left;
+}
+
+/* Header */
+.plannedTop{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.plannedTitle{
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f0f14;
+}
+
+.plannedSubtitle{
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: rgba(15,15,20,0.62);
+  max-width: 60ch;
+}
+
+/* Chart */
+.zoneChart{
+  position: relative;
+  padding: 18px 0 18px;
+  border-top: 1px solid rgba(15,15,20,0.08);
+  border-bottom: 1px solid rgba(15,15,20,0.08);
+}
+
+.zoneChartGrid{
+  position:absolute;
+  inset: 18px 0 18px 0;
+  background-image: linear-gradient(to top, rgba(15,15,20,0.06) 1px, transparent 1px);
+  background-size: 100% 22px;
+  pointer-events:none;
+  opacity: 0.65;
+}
+
+.zoneBars{
+  position: relative;
+  height: 78px;
+  display:flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.zoneSeg{
+  border-radius: 6px;
+  box-shadow: 0 10px 18px rgba(15,15,20,0.08);
+  min-width: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.zoneSeg:hover {
+  opacity: 0.85;
+}
+
+/* Tooltip de zona */
+.zoneTooltip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.zoneTooltipContent {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.zoneTooltipContent::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #fff;
+  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.1));
+}
+
+/* Colores por zona (puedes ajustarlos a tu paleta) */
+.zone_Z1{ background: rgba(120, 170, 255, 0.45); }
+.zone_Z2{ background: rgba(120, 200, 255, 0.70); }
+.zone_Z3{ background: rgba(165, 130, 255, 0.72); }
+.zone_Z4{ background: rgba(255, 210, 110, 0.88); }
+.zone_Z5{ background: rgba(255, 175, 95, 0.92); }
+.zone_Z6{ background: rgba(255, 120, 140, 0.94); }
+.zone_Z7{ background: rgba(255, 80, 115, 0.96); }
+
+/* Helvetica override */
+.helvetica {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+/* Steps */
+.stepsSection{
+  text-align: left;
+}
+
+.stepsListTop{
+  margin: 0;
+  padding-left: 22px;
+  display:flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.stepRowTop{
+  list-style-position: outside;
+}
+
+.stepBlock{
+  text-align: left;
+}
+
+.repeatChildren{
+  margin-top: 10px;
+  display:flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.repeatChildRow{
+  display:flex;
+  align-items:flex-start;
+  gap: 10px;
+}
+
+.repeatChildContent{
+  flex: 1;
+}
+
+.bullet{
+  margin-top: 6px;
+  font-size: 16px;
+  color: rgba(15,15,20,0.45);
+  line-height: 1;
+}
+
+.stepsList{
+  margin: 0;
+  padding-left: 22px; /* numeración a la izquierda */
+  display:flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stepRow{
+  list-style-position: outside;
+  text-align: left;
+}
+
+.stepLine{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.stepName{
+  font-size: 18px;
+  font-weight: 800; /* patrón: nombre del paso siempre fuerte */
+  color: #0f0f14;
+  letter-spacing: -0.01em;
+}
+
+.stepDur{
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(15,15,20,0.70);
+}
+
+.stepZone{
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 600; /* patrón: zona medio */
+  color: rgba(15,15,20,0.62);
+}
+
+.stepHint{
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500; /* patrón: hint más ligero */
+  color: rgba(15,15,20,0.50);
+}
+
+/* Repeat row */
+.stepRepeat{
+  display:flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.stepRepeatTitle{
+  font-size: 20px;
+  font-weight: 900; /* patrón: Repeat muy destacado */
+  letter-spacing: -0.01em;
+  color: #0f0f14;
+}
+
+.stepRepeatLabel{
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(15,15,20,0.55);
+}
+
+/* Footer */
+.plannedFooter{
+  padding-top: 12px;
+  border-top: 1px solid rgba(15,15,20,0.08);
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ── Pazey CTA dentro de PlannedWorkoutCard ── */
+.plannedPazeyCta {
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+  border-top: 1px solid rgba(15,15,20,0.06);
+}
+
+.totalLabel{
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(15,15,20,0.60);
+}
+
+.totalValue{
+  font-size: 16px;
+  font-weight: 900;
+  color: #0f0f14;
+}
+
+/* Chat CTA */
+.chatCTA {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(15,15,20,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.chatCTAText {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(15,15,20,0.60);
+  margin: 0;
+  text-align: center;
+}
+
+.chatCTAButton {
+  padding: 12px 24px;
+  border-radius: 14px;
+  background: rgba(140, 96, 255, 0.85);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 14px 22px rgba(140, 96, 255, 0.20);
+}
+
+.chatCTAButton:hover {
+  background: rgba(140, 96, 255, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 28px rgba(140, 96, 255, 0.28);
+}
+
+
+/* NUTRICION CARD */
+/* Full width card debajo de las dos columnas */
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+/* Panel nutrición dentro del card */
+.nutritionPanel {
+  padding: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.nutritionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.nutritionTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.nutritionEmoji {
+  font-size: 18px;
+}
+
+.nutritionEmpty {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #8a8a95;
+  font-size: 1rem;
+}
+
+/* Grid de 3 mini cards */
+.nutritionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 0;
+}
+
+/* Mini card estilo mockup */
+.nMiniCard {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  margin-bottom: 0;
+}
+
+.nMiniHeader {
+  padding: 16px 16px 14px;
+  color: #111;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nMiniTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nMiniTitle {
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #0f0f14;
+  line-height: 1.3;
+}
+
+.nMiniSubtitle {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(15,15,20,0.62);
+  text-align: center;
+}
+
+.nMiniBody {
+  padding: 14px 14px 14px;
+}
+
+.nMiniEmpty {
+  color: rgba(15,15,20,0.55);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Targets */
+.nTargets {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nTargetTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.nTargetLabel {
+  font-size: 14px;
+  color: rgba(15,15,20,0.62);
+  font-weight: 600;
+}
+
+.nTargetValue {
+  font-size: 14px;
+  font-weight: 900;
+  color: #0f0f14;
+  letter-spacing: -0.01em;
+}
+
+/* Progress bars */
+.nBarTrack {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(15,15,20,0.08);
+  overflow: hidden;
+  position: relative;
+}
+
+.nBarFill {
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(15,15,20,0.45);
+}
+
+.nBarRange {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  background: rgba(15,15,20,0.35);
+}
+
+/* Chips */
+.nChips {
+  margin-top: 12px;
+  margin-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nChip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(15,15,20,0.05);
+  color: rgba(15,15,20,0.62);
+  border: 1px solid rgba(15,15,20,0.06);
+}
+
+.nChipSoft {
+  background: rgba(15,15,20,0.03);
+  font-weight: 500;
+}
+
+/* Acentos por bloque: PRE / DURANTE / POST */
+.nPre .nMiniHeader {
+  background: linear-gradient(90deg, rgba(255, 154, 86, 0.45), rgba(255, 122, 24, 0.18));
+}
+.nDuring .nMiniHeader {
+  background: linear-gradient(90deg, rgba(255, 142, 199, 0.45), rgba(139, 92, 246, 0.16));
+}
+.nPost .nMiniHeader {
+  background: linear-gradient(90deg, rgba(167, 139, 250, 0.45), rgba(255, 165, 107, 0.12));
+}
+
+/* Colores de barra por bloque */
+.nPre .nBarFill,
+.nPre .nBarRange {
+  background: linear-gradient(90deg, rgba(255, 154, 86, 0.95), rgba(255, 122, 24, 0.85));
+}
+
+.nDuring .nBarFill,
+.nDuring .nBarRange {
+  background: linear-gradient(90deg, rgba(255, 142, 199, 0.95), rgba(139, 92, 246, 0.85));
+}
+
+.nPost .nBarFill,
+.nPost .nBarRange {
+  background: linear-gradient(90deg, rgba(167, 139, 250, 0.95), rgba(255, 165, 107, 0.85));
+}
+
+/* Responsivo (si reduces ventana) */
+@media (max-width: 1100px) {
+  .nutritionGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Done workout stats unificados ── */
+.doneStatsCard {
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(15,15,20,0.07);
+  border-radius: 14px;
+  padding: 14px 20px;
+}
+
+.doneStatItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.doneStatValue {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f0f14;
+  letter-spacing: -0.01em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.doneStatLabel {
+  font-size: 0.72rem;
+  color: rgba(15,15,20,0.45);
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.doneStatDivider {
+  width: 1px;
+  height: 36px;
+  background: rgba(15,15,20,0.08);
+  flex-shrink: 0;
+}
+
+/* ── Vista mensual ── */
+.calPage {
+  min-height: 100vh;
+  background: #f0f0f0;
+  padding: 32px 0 80px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.calContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.calHeader {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calHeaderCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.calHeaderRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.calTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f0f14;
+  margin: 0;
+  min-width: 220px;
+  text-align: center;
+}
+
+.calNavBtn {
+  background: #fff;
+  border: 1px solid rgba(15,15,20,0.1);
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f0f14;
+  transition: background 0.15s;
+}
+
+.calNavBtn:hover { background: #ececf3; }
+
+.calWeekRow {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.calWeekLabel {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.4);
+  padding: 4px 0;
+  text-transform: uppercase;
+}
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.calCellEmpty {
+  min-height: 100px;
+  background: transparent;
+}
+
+.calCell {
+  min-height: 100px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(15,15,20,0.07);
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.calCell:hover {
+  border-color: #6366f1;
+  box-shadow: 0 4px 12px rgba(99,102,241,0.1);
+}
+
+.calCellToday {
+  border-color: #6366f1;
+  background: rgba(99,102,241,0.04);
+}
+
+.calDayNum {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(15,15,20,0.5);
+  align-self: flex-end;
+}
+
+.calCellToday .calDayNum {
+  color: #6366f1;
+}
+
+.calPill {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  background: rgba(99,102,241,0.08);
+  border-radius: 6px;
+  padding: 4px 6px;
+  overflow: hidden;
+}
+
+.calPillDone {
+  background: rgba(252,76,2,0.08);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 4px 6px;
+}
+
+.calPillDone .calPillText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.calPillDone .calPillMeta {
+  font-size: 0.65rem;
+  color: rgba(15,15,20,0.5);
+  white-space: nowrap;
+}
+
+.calPillDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.calPillText {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #0f0f14;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.calPillMeta {
+  font-size: 0.65rem;
+  color: rgba(15,15,20,0.45);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Fila de semana (7 días + resumen) ── */
+.calRow {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) 130px;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+/* Resumen semanal — sin card, solo texto */
+.calWeekSummary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  min-height: 100px;
+}
+
+.calWeekRow1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.calWeekRow2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.calWeekStat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.calWeekStatVal {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #0f0f14;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1;
+}
+
+.calWeekStatLbl {
+  font-size: 0.6rem;
+  color: rgba(15,15,20,0.4);
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.calWeekDivider {
+  height: 1px;
+  background: rgba(15,15,20,0.07);
+  margin: 2px 0;
+}
+
+.calWeekEmpty {
+  font-size: 0.7rem;
+  color: rgba(15,15,20,0.25);
+  text-align: center;
+}
+
+/* Actualizar cabecera para incluir columna resumen */
+.calWeekRow {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) 130px;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+/* Botón sync discreto */
+.syncSmall {
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.4);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: color 0.15s, background 0.15s;
+}
+
+.syncSmall:hover:not(:disabled) {
+  color: rgba(15,15,20,0.75);
+  background: rgba(15,15,20,0.05);
+}
+
+.syncSmall:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ═══════════════════════════════════════════════════
+   VISTA DÍA — REDISEÑO (sesiones)
+   ═══════════════════════════════════════════════════ */
+
+/* Back nav row */
+.diaBackNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.diaBackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(15,15,20,0.45);
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: color 0.15s;
+}
+
+.diaBackLink:hover {
+  color: rgba(15,15,20,0.75);
+}
+
+/* Day summary strip */
+.daySummaryStrip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: #fff;
+  border: 1px solid rgba(15,15,20,0.07);
+  border-radius: 14px;
+  padding: 12px 24px;
+  margin: 16px 0 24px;
+  width: fit-content;
+}
+
+.daySummaryStat {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 0 20px;
+}
+
+.daySummaryStat:first-child {
+  padding-left: 0;
+}
+
+.daySummaryVal {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0f0f14;
+  letter-spacing: -0.01em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.daySummaryLbl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.45);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.daySummaryDivider {
+  width: 1px;
+  height: 28px;
+  background: rgba(15,15,20,0.08);
+  flex-shrink: 0;
+}
+
+/* Sessions container */
+.sessionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 60px;
+}
+
+/* Session block */
+.sessionBlock {
+  background: #fff;
+  border: 1px solid rgba(15,15,20,0.07);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(15,15,20,0.05);
+  overflow: hidden;
+}
+
+/* Session label (only shown when multiple sessions) */
+.sessionLabel {
+  padding: 14px 24px 0;
+}
+
+.sessionIndex {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(15,15,20,0.35);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Two-column grid inside session */
+.sessionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+/* Each column */
+.sessionCol {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sessionCol:first-child {
+  border-right: 1px solid rgba(15,15,20,0.07);
+}
+
+/* Column header */
+.sessionColHeader {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 16px 24px 12px;
+  border-bottom: 1px solid rgba(15,15,20,0.06);
+  background: rgba(15,15,20,0.015);
+  min-height: 52px;
+  box-sizing: border-box;
+}
+
+.sessionColDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sessionColTitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(15,15,20,0.5);
+  flex: 1;
+}
+
+.sessionColMeta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.35);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Column body */
+.sessionColBody {
+  flex: 1;
+  padding: 0;
+}
+
+/* Empty state inside session */
+.sessionEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 48px 24px;
+  color: rgba(15,15,20,0.4);
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: center;
+  min-height: 200px;
+}
+
+.sessionEmpty p {
+  margin: 0;
+}
+
+/* Small chat button */
+.chatButtonSm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(215, 97, 166, 0.28);
+  background: rgba(215, 97, 166, 0.06);
+  color: #c0186e;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  transition: background 0.15s, border-color 0.15s, transform 0.12s;
+}
+
+.chatButtonSm:hover {
+  background: rgba(215, 97, 166, 0.12);
+  border-color: rgba(215, 97, 166, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Nutrition accordion */
+.nutritionAccordion {
+  border-top: 1px solid rgba(15,15,20,0.07);
+}
+
+.nutritionAccordionToggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.nutritionAccordionToggle:hover {
+  background: rgba(15,15,20,0.02);
+}
+
+.nutritionAccordionTitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(15,15,20,0.5);
+  flex: 1;
+}
+
+.nutritionAccordionBadge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: rgba(15,15,20,0.3);
+  background: rgba(15,15,20,0.05);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.nutritionAccordionChevron {
+  font-size: 0.65rem;
+  color: rgba(15,15,20,0.3);
+}
+
+.nutritionAccordionBody {
+  padding: 0 0 4px;
+  border-top: 1px solid rgba(15,15,20,0.05);
+}
+
+/* Empty day state */
+.diaEmptyDay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.diaEmptyText {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(15,15,20,0.45);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Responsive: stack columns on narrow screens */
+@media (max-width: 860px) {
+  .sessionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sessionCol:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgba(15,15,20,0.07);
+  }
+}
+
+/* Pazey CTA dentro del SessionBlock */
+.sessionPazeyCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-top: 1px solid rgba(15,15,20,0.06);
+}
+
+/* ── Drag and Drop ── */
+
+/* Celda que está siendo hover durante un drag */
+.calCellDropTarget {
+  border-color: #6366f1 !important;
+  background: rgba(99, 102, 241, 0.06) !important;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25) !important;
+}
+
+/* Pastilla siendo arrastrada */
+.calPillDragging {
+  opacity: 0.4;
+  cursor: grabbing;
+}
+
+/* Cursor grab en pastillas planificadas */
+.calPill[draggable="true"] {
+  cursor: grab;
+}
+
+.calPill[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+/* ── Pastillas de evento y métricas ── */
+.calPillEvent {
+  background: rgba(245, 158, 11, 0.1);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 4px 6px;
+}
+
+.calPillMetric {
+  background: rgba(34, 197, 94, 0.08);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 4px 6px;
+}
+
+/* ═══════════════════════════════════════════════════
+   ANÁLISIS DEL ENTRENO
+   ═══════════════════════════════════════════════════ */
+
+.analysisBody {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.analysisBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.analysisSection {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(15,15,20,0.38);
+}
+
+.analysisRows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.analysisRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.analysisLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(15,15,20,0.62);
+  flex: 1;
+}
+
+.analysisRight {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.analysisValue {
+  font-size: 15px;
+  font-weight: 900;
+  color: #0f0f14;
+  letter-spacing: -0.01em;
+}
+
+.analysisSub {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(15,15,20,0.38);
+}
+
+/* Badges de desviación */
+.analysisBadge {
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.analysisBadge_ok {
+  background: rgba(34, 197, 94, 0.10);
+  color: #16a34a;
+}
+
+.analysisBadge_warn {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+}
+
+.analysisBadge_bad {
+  background: rgba(239, 68, 68, 0.10);
+  color: #dc2626;
+}
+
+.analysisDivider {
+  height: 1px;
+  background: rgba(15,15,20,0.07);
+  margin: 16px 0;
+}
+
+/* Estado vacío */
+.analysisEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px 16px;
+  color: rgba(15,15,20,0.38);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.analysisEmpty p {
+  margin: 0;
+}
+
+.analysisEmptyIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(15,15,20,0.05);
+  color: rgba(15,15,20,0.35);
+}
+
+.analysisToggleIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b5cf6;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   PAPELERA (drag to delete en calendario mensual)
+   ═══════════════════════════════════════════════════ */
+
+.trashZone {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(255,255,255,0.92);
+  border: 1.5px dashed rgba(239, 68, 68, 0.35);
+  border-radius: 999px;
+  color: rgba(239, 68, 68, 0.6);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
+  pointer-events: all;
+  z-index: 100;
+}
+
+.trashZoneActive {
+  background: rgba(254, 226, 226, 0.96);
+  border-color: #ef4444;
+  border-style: solid;
+  color: #dc2626;
+  transform: translateX(-50%) scale(1.04);
+  box-shadow: 0 12px 32px rgba(239, 68, 68, 0.18);
+}
+
+/* ── Botón borrar en cabecera de columna Planificado ── */
+
+.deletePlannedBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: none;
+  background: none;
+  color: rgba(15,15,20,0.28);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s;
+}
+
+.deletePlannedBtn:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.08);
+  color: #ef4444;
+}
+
+.deletePlannedBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Días bloqueados ── */
+.calCellBlocked {
+  background: rgba(239, 68, 68, 0.03);
+}
+
+.calPillBlocked {
+  background: rgba(239, 68, 68, 0.08);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 4px 6px;
+}
+
+/* ── Botón Analizar entreno ── */
+.analyzeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 4px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  background: rgba(139, 92, 246, 0.06);
+  color: #7c3aed;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.12s;
+  align-self: center;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.analyzeBtn:hover {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.45);
+  transform: translateY(-1px);
+}
+
+/* ── Pazey CTA dentro de PlannedWorkoutCard ── */
+.plannedPazeyCta {
+  display: flex;
+  justify-content: center;
+  padding: 14px 20px;
+  border-top: 1px solid rgba(15,15,20,0.06);
+}
+
+/* ── Strava footer en DoneWorkoutCard ── */
+.doneStravaFooter {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  border-top: 1px solid rgba(15,15,20,0.06);
+  margin-top: 4px;
+}
+
+/* ── Laps table ── */
+.lapsTableWrapper {
+  overflow-x: auto;
+  margin-top: 8px;
+}
+
+.lapsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.lapsTable thead tr {
+  border-bottom: 1px solid rgba(15,15,20,0.1);
+}
+
+.lapsTable th {
+  text-align: left;
+  padding: 6px 10px;
+  font-weight: 600;
+  color: #888;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.lapsTable td {
+  padding: 7px 10px;
+  border-bottom: 1px solid rgba(15,15,20,0.05);
+  white-space: nowrap;
+}
+
+.lapsTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.lapsTable tbody tr:hover {
+  background: rgba(99,102,241,0.04);
+}
+
+.lapsIndex {
+  color: #aaa;
+  font-size: 0.72rem;
+  font-weight: 600;
+  width: 28px;
+}

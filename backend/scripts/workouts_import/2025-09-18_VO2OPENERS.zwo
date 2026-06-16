@@ -1,0 +1,67 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>VO2 OPENERS 2&apos;</name>
+	<description>OBJETIVO: Mejorar la capacidad aeróbica máxima trabajando en el rango de VO2max, buscando alcanzar y mantener el máximo de potencia en cada serie. Este enfoque optimiza el rendimiento en esfuerzos intensos y prolongados​.
+__________________________________________
+
+EJECUCIÓN: Trabajo en subida. 20&quot; muy fuerte, 1:40 vo2
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<SteadyState Duration="1200" Power="0.63">
+		</SteadyState>
+		<SteadyState Duration="20" Power="1.28">
+		</SteadyState>
+		<SteadyState Duration="100" Power="1.15">
+		</SteadyState>
+		<SteadyState Duration="360" Power="0.33">
+		</SteadyState>
+		<SteadyState Duration="20" Power="1.28">
+		</SteadyState>
+		<SteadyState Duration="100" Power="1.15">
+		</SteadyState>
+		<SteadyState Duration="360" Power="0.33">
+		</SteadyState>
+		<SteadyState Duration="20" Power="1.28">
+		</SteadyState>
+		<SteadyState Duration="100" Power="1.15">
+		</SteadyState>
+		<SteadyState Duration="360" Power="0.33">
+		</SteadyState>
+		<SteadyState Duration="20" Power="1.28">
+		</SteadyState>
+		<SteadyState Duration="100" Power="1.15">
+		</SteadyState>
+		<SteadyState Duration="360" Power="0.33">
+		</SteadyState>
+		<SteadyState Duration="20" Power="1.28">
+		</SteadyState>
+		<SteadyState Duration="100" Power="1.15">
+		</SteadyState>
+		<SteadyState Duration="360" Power="0.33">
+		</SteadyState>
+		<SteadyState Duration="20" Power="1.28">
+		</SteadyState>
+		<SteadyState Duration="100" Power="1.15">
+		</SteadyState>
+		<SteadyState Duration="360" Power="0.33">
+		</SteadyState>
+		<SteadyState Duration="20" Power="1.28">
+		</SteadyState>
+		<SteadyState Duration="100" Power="1.15">
+		</SteadyState>
+		<SteadyState Duration="360" Power="0.33">
+		</SteadyState>
+		<SteadyState Duration="2700" Power="0.63">
+		</SteadyState>
+		<Cooldown Duration="660" PowerHigh="0.38" PowerLow="0.58">
+		</Cooldown>
+	</workout>
+</workout_file>

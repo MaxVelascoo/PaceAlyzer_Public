@@ -1,0 +1,25 @@
+<workout_file>
+	<author>Max Velasco (via TrainingPeaks)</author>
+	<name>SWEETSPOT (4 x 10)</name>
+	<description>OBJETIVO: Elevar el umbral de lactato, permite sostener esfuerzos altos durante más tiempo y ayuda a desarrollar el VO2max. Al usar sesiones de sweet spot, los ciclistas logran maximizar beneficios en menos tiempo, mejorando la eficiencia y la fuerza muscular​
+__________________________________________
+
+EJECUCIÓN: Terreno variado (llano o subida)
+__________________________________________
+
+Calentamiento (a escoger):
+- Rodar 20/30&apos;
+- Rodar con 3 series 30&quot; umbral + 30&quot; descanso
+
+**El tiempo de entrenamiento y los tiempos de descansos entre series son orientativos.</description>
+	<sportType>bike</sportType>
+	<tags/>
+	<workout>
+		<Warmup Duration="1800" PowerHigh="0.7" PowerLow="0.5">
+		</Warmup>
+		<IntervalsT Repeat="4" OnDuration="600" OnPower="0.93" OffDuration="600" OffPower="0.55">
+		</IntervalsT>
+		<SteadyState Duration="3000" Power="0.6">
+		</SteadyState>
+	</workout>
+</workout_file>
